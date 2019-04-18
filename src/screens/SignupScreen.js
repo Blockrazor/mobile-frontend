@@ -17,7 +17,6 @@ import {
   Text,
   Icon
 } from "native-base";
-import AppHeader from "../components/AppHeader";
 
 export default class SignUpScreen extends Component {
   constructor(props) {

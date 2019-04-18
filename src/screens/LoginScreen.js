@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, ActivityIndicator, Platform,StatusBar } from "react-native";
+import { View, ActivityIndicator, Platform, StatusBar } from "react-native";
 import * as firebase from "firebase";
 import {
   Content,
@@ -14,9 +14,9 @@ import {
   Item,
   Label,
   Button,
-  Text
+  Text,
+  Icon
 } from "native-base";
-import AppHeader from '../components/AppHeader';
 
 firebase.initializeApp({
   apiKey: "AIzaSyAH2POco6dMPfsdwL04OREBoPdK6oQnGOg",
@@ -41,7 +41,7 @@ export default class LoginScreen extends Component {
       .signInWithEmailAndPassword(email, password)
       .then(() => {
         this.setState({ error: "", loading: false });
-        this.props.navigation.navigate("Main");
+        this.props.navigation.navigate("Home");
       })
       .catch(err => {
         alert(err);
@@ -49,37 +49,52 @@ export default class LoginScreen extends Component {
       });
   }
 
-
   renderButtonOrLoading() {
     if (this.state.loading) {
       return <ActivityIndicator />;
     }
     return (
-      <Container>
-        <Button transparent onPress={()=> this.props.navigation.navigate("Forgot")}>
-        <Text note>Forgot your Password?</Text>
+      <View>
+        <Button
+          transparent
+          onPress={() => this.props.navigation.navigate("Forgot")}
+        >
+          <Text note>Forgot your Password?</Text>
         </Button>
-          <Button transparent onPress={this.onLoginPress.bind(this)}>
-            <Text>Login</Text>
-          </Button>
-          <Button transparent onPress={()=> this.props.navigation.navigate("SignUp")}>
-            <Text>Sign Up</Text>
-          </Button>
-      </Container>
+        <Button transparent onPress={this.onLoginPress.bind(this)}>
+          <Text>Login</Text>
+        </Button>
+        <Button
+          transparent
+          onPress={() => this.props.navigation.navigate("SignUp")}
+        >
+          <Text>Sign Up</Text>
+        </Button>
+      </View>
     );
   }
 
   render() {
     return (
       <Container>
-        <Header style={{
-            //backgroundColor:'green', 
-            marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}} >
-            <Left/>
-            <Body>
-              <Title>BlockRazor</Title>
-            </Body>
-            <Right/>
+        <Header
+          style={{
+            //backgroundColor:'green',
+            marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
+          }}
+        >
+          <Left>
+            <Button
+              transparent
+              onPress={() => this.props.navigation.navigate("Home")}
+            >
+              <Icon name="arrow-back" />
+            </Button>
+          </Left>
+          <Body>
+            <Title>BlockRazor</Title>
+          </Body>
+          <Right />
         </Header>
         <Content>
           <Form>
