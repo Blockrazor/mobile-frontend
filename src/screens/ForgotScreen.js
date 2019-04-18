@@ -17,7 +17,6 @@ import {
   Text,
   Icon
 } from "native-base";
-import AppHeader from "../components/AppHeader";
 
 export default class ForgotScreen extends Component {
   constructor(props) {
@@ -50,21 +49,21 @@ export default class ForgotScreen extends Component {
       return <ActivityIndicator />;
     }
     //not filled yet
-    if(this.state.email == ''){
-      return(
+    if (this.state.email == "") {
+      return (
         <View>
           <Button block disabled>
             <Text>Send Password Reset Email</Text>
           </Button>
-      </View>
-      )
+        </View>
+      );
     }
     //everything is ok
     return (
       <View>
-          <Button block onPress={this.onForgotPress.bind(this)}>
-            <Text>Send Password Reset Email</Text>
-          </Button>
+        <Button block onPress={this.onForgotPress.bind(this)}>
+          <Text>Send Password Reset Email</Text>
+        </Button>
       </View>
     );
   }
@@ -98,7 +97,7 @@ export default class ForgotScreen extends Component {
                 value={this.state.email}
                 onChangeText={email => this.setState({ email: email })}
               />
-              </Item>
+            </Item>
           </Form>
           <Text />
           <Text />

@@ -1,32 +1,33 @@
-import React from 'react';
-import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator , createDrawerNavigator} from 'react-navigation';
+import React from "react";
+import { Platform } from "react-native";
+import {
+  createStackNavigator,
+  createDrawerNavigator
+} from "react-navigation";
 
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import { Icon } from 'native-base';
+import HomeScreen from "../screens/HomeScreen";
+import LoginStack from "./AuthStackNavigator";
+
+import { Icon } from "native-base";
 const HomeStack = createStackNavigator(
   {
     Home: {
-      screen: HomeScreen,
+      screen: HomeScreen
     },
+    Login: LoginStack
   },
   {
-    initialRouteName: 'Home',
-    headerMode: "none",
+    initialRouteName: "Home",
+    headerMode: "none"
   }
 );
 
 HomeStack.navigationOptions = {
-  drawerLabel: 'Home',
-  drawerIcon: ({ tintColor }) => (
-    <Icon name='home'/>
-  ),
+  drawerLabel: "Home",
+  drawerIcon: ({ tintColor }) => <Icon name="home" />
 };
 
-const Drawer = createDrawerNavigator(
-  {
-    HomeStack
-  }
-);
+const Drawer = createDrawerNavigator({
+  HomeStack
+});
 export default Drawer;
