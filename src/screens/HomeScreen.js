@@ -2,7 +2,7 @@ import React, { Component} from 'react';
 import {Platform, StatusBar} from 'react-native';
 import { Drawer , Container, Left, Header, Body, Content, Button, Icon, Text,Footer, FooterTab, Right} from 'native-base';
 import  CoinsStats  from '../components/CoinsStats';
-
+import HomeScreenHeader from '../components/HomeScreenHeader';
 export default class DrawerExample extends Component {
   static navigationOptions = ({navigation}) => {
     // headerTitle instead of title
@@ -22,6 +22,7 @@ export default class DrawerExample extends Component {
 
     return (
       <Container>
+      <HomeScreenHeader navigation={this.props.navigation}/>
           <CoinsStats navigation={this.props.navigation}/>
           <Footer>
           <FooterTab>
