@@ -33,9 +33,9 @@ export default class CoinsComments extends Component {
             <Input placeholder='Your comment here...' />
           </Item>
           <Item picker>
+            <View style={{flex : 5}}>
             <Picker
               mode="dropdown"
-              iosIcon={<Icon name="arrow-down" />}
               style={{ width: undefined }}
               placeholder="Please choose your stance"
               placeholderStyle={{ color: "#bfc6ea" }}
@@ -46,9 +46,12 @@ export default class CoinsComments extends Component {
               <Picker.Item label="Positive" value="positive" />
               <Picker.Item label="Negative" value="negative" />
             </Picker>
+            </View>
+            <View style={{flex : 1}}>
             <Button transparent>
               <Icon name='send' />
             </Button>
+            </View>
           </Item>
         </View>
       </View>
