@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { ListItem, Icon, Header, Left, Body, Text, Right, Thumbnail, Card, CardItem, Segment, Button, Content, Container, Footer } from 'native-base';
 
 
-export default class CommentCard extends Component {
+export default class TopCommentCard extends Component {
     constructor(props) {
         super(props);
         this.state = {
