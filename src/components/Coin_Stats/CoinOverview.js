@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import PriceCard from './PriceCard';
-import SummaryCard from './SummaryCard';
-import CommentCard from './CommentCard';
-import NewsCard from './NewsCard';
-export default class CoinsStats extends Component {
+import PriceCard from './Overview/PriceCard';
+import SummaryCard from './Overview/SummaryCard';
+import CommentCard from './Overview/CommentCard';
+import NewsCard from './Overview/NewsCard';
+export default class CoinsOverView extends Component {
   constructor(props) {
     super(props);
     this.state = {

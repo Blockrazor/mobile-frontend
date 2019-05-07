@@ -1,7 +1,7 @@
 import React, { Component} from 'react';
 import {Platform, StatusBar} from 'react-native';
 import { Drawer , Container, Left, Header, Body, Content, Button, Icon, Text,Footer, FooterTab, Right} from 'native-base';
-import  CoinsStats  from '../components/CoinsStats';
+import  CoinsStats  from '../components/Coin_Stats/CoinsStats';
 
 export default class DrawerExample extends Component {
   static navigationOptions = ({navigation}) => {
