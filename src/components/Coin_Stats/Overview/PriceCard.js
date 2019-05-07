@@ -1,4 +1,4 @@
-import React, { Component } from './node_modules/react';
+import React, { Component } from 'react';
 import { View } from 'react-native';
 import { ListItem, Icon, Header, Left, Body, Text, Right, Thumbnail, Card, CardItem, Segment, Button, Content, Container, Footer ,List} from 'native-base';
 import { Col, Row, Grid } from "react-native-easy-grid";
