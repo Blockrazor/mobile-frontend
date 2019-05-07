@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Platform, StatusBar} from 'react-native';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 import { Tab, Tabs, TabHeading, Content, Container, Icon, Text, Header} from 'native-base';
 import Overview from './CoinOverview';
 import CoinFooter from './CoinFooter';
@@ -14,7 +15,7 @@ export default class CoinsStats extends Component {
     return (
       <Container>
           <Tabs style={{
-            marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
+            marginTop: getStatusBarHeight()}}>
           <Tab heading={ <TabHeading><Icon name='home' /></TabHeading>}>
           <Content>
             <Overview />
