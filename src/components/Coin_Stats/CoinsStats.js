@@ -17,7 +17,6 @@ export default class CoinsStats extends Component {
 
   render() {
     return (
-
       <Container>
           <Tabs style={{
             marginTop: getStatusBarHeight()}} 

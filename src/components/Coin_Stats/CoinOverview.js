@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import { Content} from 'native-base';
 import PriceCard from './Overview/PriceCard';
 import SummaryCard from './Overview/SummaryCard';
-import CommentCard from './Overview/CommentCard';
+import TopCommentCard from './Overview/TopCommentCard';
 import NewsCard from './Overview/NewsCard';
+
 export default class CoinsOverView extends Component {
   constructor(props) {
     super(props);
@@ -13,12 +15,12 @@ export default class CoinsOverView extends Component {
 
   render() {
     return (
-        <View>
-          <PriceCard />
-          <SummaryCard />
-          <CommentCard />
-          <NewsCard />
-        </View>
+      <Content>
+        <PriceCard />
+        <SummaryCard />
+        <TopCommentCard />
+        <NewsCard />
+      </Content>
     );
   }
 }
