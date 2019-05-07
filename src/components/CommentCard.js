@@ -12,9 +12,6 @@ export default class CommentCard extends Component {
     render() {
         return (
             <Card>
-                <CardItem header>
-                    <Text>Top Comments</Text>
-                </CardItem>
                 <CardItem style={{ backgroundColor: "#e0d1d1" }}>
                     <Body>
                         <Text>
