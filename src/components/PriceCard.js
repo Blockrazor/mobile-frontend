@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import { ListItem, Icon, Header, Left, Body, Text, Right, Thumbnail, Card, CardItem, Segment, Button, Content, Container, Footer } from 'native-base';
+import { ListItem, Icon, Header, Left, Body, Text, Right, Thumbnail, Card, CardItem, Segment, Button, Content, Container, Footer ,List} from 'native-base';
 import { Col, Row, Grid } from "react-native-easy-grid";
 
 export default class PriceCard extends Component {
@@ -11,7 +11,7 @@ export default class PriceCard extends Component {
     }
     render() {
         return (
-            <Card>
+            <List>
                 <ListItem>
                     <Left>
                         <Thumbnail source={{ uri: 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579' }} />
@@ -41,7 +41,7 @@ export default class PriceCard extends Component {
                         </Col>
                     </Grid>
                 </ListItem>
-            </Card>
+            </List>
         );
     }
 }
