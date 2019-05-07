@@ -14,7 +14,7 @@ export default class CointFooter extends Component {
             <Footer>
             <FooterTab>
             <Button full>
-                <Icon name='heart-dislike'/>
+                <Icon name='md-close-circle'/>
               </Button>
               <Button full>
                 <Icon name='heart'/>
