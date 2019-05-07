@@ -23,16 +23,6 @@ export default class DrawerExample extends Component {
     return (
       <Container>
           <CoinsStats navigation={this.props.navigation}/>
-          <Footer>
-          <FooterTab>
-          <Button full>
-              <Icon name='thumbs-down'/>
-            </Button>
-            <Button full>
-              <Icon name='thumbs-up'/>
-            </Button>
-          </FooterTab>
-          </Footer>
       </Container>
     );
   }
