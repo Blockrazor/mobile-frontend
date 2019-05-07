@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-import { View, Image, Platform, StatusBar } from 'react-native';
-import { ListItem, Icon, Header, Left, Body, Text, Right, Thumbnail, Card, CardItem, Segment, Button, Content, Container, Footer ,FooterTab,} from 'native-base';
-import CoinHeader from './CoinHeader';
-import PriceCard from './PriceCard';
-import SummaryCard from './SummaryCard';
-import CommentCard from './CommentCard';
-import NewsCard from './NewsCard';
+import {Platform, StatusBar} from 'react-native';
+import { Tab, Tabs, TabHeading, Content, Container, Icon, Text, Header} from 'native-base';
+import Overview from './CoinOverview';
 import CoinFooter from './CoinFooter';
 export default class CoinsStats extends Component {
   constructor(props) {
@@ -17,13 +13,24 @@ export default class CoinsStats extends Component {
   render() {
     return (
       <Container>
-        <CoinHeader />
-        <Content>
-          <PriceCard />
-          <SummaryCard />
-          <CommentCard />
-          <NewsCard />
-        </Content>
+          <Tabs style={{
+            marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
+          <Tab heading={ <TabHeading><Icon name='home' /></TabHeading>}>
+          <Content>
+            <Overview />
+          </Content>
+          </Tab>
+          <Tab heading={ <TabHeading><Icon name='eye' /></TabHeading>}>
+          </Tab>
+          <Tab heading={ <TabHeading><Icon name="logo-rss" /></TabHeading>}>
+          </Tab>
+          <Tab heading={ <TabHeading><Icon name='trending-up' /></TabHeading>}>
+          </Tab>
+          <Tab heading={ <TabHeading><Icon name="chatbubbles" /></TabHeading>}>
+          </Tab>
+          <Tab heading={ <TabHeading><Icon name='search' /></TabHeading>}>
+          </Tab>
+        </Tabs>
         <CoinFooter />
       </Container>
     );
