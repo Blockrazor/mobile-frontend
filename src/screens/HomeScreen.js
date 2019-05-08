@@ -7,18 +7,32 @@ import News from '../components/Coin_Stats/CoinNews';
 import Comment from '../components/Coin_Stats/CoinComment';
 import Wall from '../components/Coin_Stats/CoinWall';
 import CoinFooter from '../components/Coin_Stats/CoinFooter';
+import Search from '../components/Coin_Stats/CoinSearch';
+
+
 export default class HomeScreen extends Component {
   constructor(props) {
     super(props)
-
+    this.state = { currentPage: 0}
   }
+
+  _footer() {
+    if(this.state.currentPage == 0 ||this.state.currentPage == 1 ||this.state.currentPage == 2 ||this.state.currentPage == 3 ){
+      return <CoinFooter />
+    }
+    else{
+      return
+    }
+  }
+
   render() {
     return (
       <Container>
           <Tabs 
             style={{
             marginTop: getStatusBarHeight()}}
-            renderTabBar={()=> <ScrollableTab />} 
+            renderTabBar={()=> <ScrollableTab />}
+            onChangeTab={({i}) => this.setState({currentPage: i})} 
             //ref={(c) => { this.tabs = c; return; }} initialPage={1}
             >
           <Tab heading={ <TabHeading><Icon name='eye' /></TabHeading>}>
@@ -33,6 +47,7 @@ export default class HomeScreen extends Component {
             <Comment />
           </Tab>
           <Tab heading={ <TabHeading><Icon name='search' /></TabHeading>}>
+            <Search />
           </Tab>
           <Tab heading={ <TabHeading><Icon name='albums' /></TabHeading>}>
             <Wall />
@@ -42,7 +57,7 @@ export default class HomeScreen extends Component {
           <Tab heading={ <TabHeading><Icon name='information-circle' /></TabHeading>}>
           </Tab>
         </Tabs>
-        <CoinFooter />
+        {this._footer()}
       </Container>
     );
   }
