@@ -1,6 +1,6 @@
 import React, { Component} from 'react';
 import {Platform} from 'react-native';
-import { Tab, Tabs, TabHeading, Container, Icon, Text, ScrollableTab} from 'native-base';
+import { Tab, Tabs, TabHeading, Container, Icon, Text, ScrollableTab, Button} from 'native-base';
 import Overview from '../components/Coin_Stats/CoinOverview';
 import News from '../components/Coin_Stats/CoinNews';
 import Comment from '../components/Coin_Stats/CoinComment';
@@ -27,7 +27,7 @@ export default class HomeScreen extends Component {
   render() {
     return (
       <Container>
-        <CoinHeader />
+        <CoinHeader navigation={this.props.navigation}/>
           <Tabs 
             style={
               Platform.OS === 'android' ? { overflow: 'hidden', 
