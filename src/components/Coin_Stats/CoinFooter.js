@@ -13,11 +13,11 @@ export default class CointFooter extends Component {
         return (
             <Footer>
             <FooterTab>
-            <Button full>
-                <Icon name='md-close-circle'/>
+            <Button full danger>
+                <Icon name='close-circle' style={{color: 'white'}}/>
               </Button>
-              <Button full>
-                <Icon name='heart'/>
+              <Button full success>
+                <Icon name='checkmark-circle' style={{color: 'white'}}/>
               </Button>
             </FooterTab>
             </Footer>
