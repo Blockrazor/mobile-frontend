@@ -1,7 +1,7 @@
 import React, { Component} from 'react';
 import {Platform, StatusBar} from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
-import { Tab, Tabs, TabHeading, Content, Container, Icon, Text, Header} from 'native-base';
+import { Tab, Tabs, TabHeading, Content, Container, Icon, Text, Header, ScrollableTab} from 'native-base';
 import Overview from '../components/Coin_Stats/CoinOverview';
 import News from '../components/Coin_Stats/CoinNews';
 import Comment from '../components/Coin_Stats/CoinComment';
@@ -15,8 +15,10 @@ export default class HomeScreen extends Component {
   render() {
     return (
       <Container>
-          <Tabs style={{
+          <Tabs 
+            style={{
             marginTop: getStatusBarHeight()}}
+            renderTabBar={()=> <ScrollableTab />} 
             //ref={(c) => { this.tabs = c; return; }} initialPage={1}
             >
           <Tab heading={ <TabHeading><Icon name='eye' /></TabHeading>}>
@@ -34,6 +36,10 @@ export default class HomeScreen extends Component {
           </Tab>
           <Tab heading={ <TabHeading><Icon name='albums' /></TabHeading>}>
             <Wall />
+          </Tab>
+          <Tab heading={ <TabHeading><Icon name='contact' /></TabHeading>}>
+          </Tab>
+          <Tab heading={ <TabHeading><Icon name='information-circle' /></TabHeading>}>
           </Tab>
         </Tabs>
         <CoinFooter />
