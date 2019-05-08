@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import { ListItem, Icon, Header, Left, Body, Text, Right, Thumbnail, Card, CardItem, Segment, Button, Content, Container, Footer ,List} from 'native-base';
+import { ListItem, Icon, Header, Left, Body, Text, Right, Thumbnail, Card, CardItem, Segment, Button, Content, Container, Footer, List } from 'native-base';
 import { Col, Row, Grid } from "react-native-easy-grid";
 
 export default class PriceCard extends Component {
@@ -13,17 +13,19 @@ export default class PriceCard extends Component {
         return (
             <List>
                 <ListItem>
-                    <Left>
-                        <Thumbnail source={{ uri: 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579' }} />
-                    </Left>
-                    <Body>
-                        <Text style={{ fontSize: 20 }}>BitCoin</Text>
-                    </Body>
-                    <Right>
-                        <Text style={{ fontSize: 14 }} >
-                            BTC
-              </Text>
-                    </Right>
+                    <Grid style={{alignItems:'center', justifyContent: 'center'}}>
+                        <Col>
+                            <Thumbnail source={{ uri: 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579' }} />
+                        </Col>
+                        <Col>
+                            <Text style={{ fontSize: 20 }}>BitCoin</Text>
+                        </Col>
+                        <Col>
+                            <Text style={{ fontSize: 14 }} >
+                                BTC
+                        </Text>
+                        </Col>
+                    </Grid>
                 </ListItem>
                 <ListItem>
                     <Grid>
@@ -31,13 +33,13 @@ export default class PriceCard extends Component {
                             <Text>1.000</Text>
                             <Text style={{ fontSize: 10 }} >
                                 BTC
-              </Text>
+                             </Text>
                         </Col>
                         <Col>
                             <Text>$5,942.78</Text>
                             <Text style={{ fontSize: 10 }} >
                                 USD
-              </Text>
+                            </Text>
                         </Col>
                     </Grid>
                 </ListItem>

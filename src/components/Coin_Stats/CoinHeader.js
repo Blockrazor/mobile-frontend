@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text , Platform, StatusBar} from 'react-native';
-import {Header, Left, Body, Button, Icon} from 'native-base';
+import { View } from 'react-native';
+import { Header, Left, Right, Body, Title, Button, Icon, Text } from 'native-base';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
+import ActionSheet from 'react-native-actionsheet'
 
 export default class CoinHeader extends Component {
   constructor(props) {
@@ -8,43 +10,39 @@ export default class CoinHeader extends Component {
     this.state = {
     };
   }
-
+  showActionSheet = () => {
+    this.ActionSheet.show()
+  }
   render() {
     return (
-        <Header style={{
-            //backgroundColor:'green', 
-            marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}} >
-            <Button transparent
-              //onPress={() => this.props.navigation.openDrawer()}
+      <View>
+        <Header
+          hasTabs
+          style={{
+            marginTop: getStatusBarHeight()
+          }}>
+          <Left />
+          <Body>
+            <Title>deepBloq</Title>
+          </Body>
+          <Right>
+            <Button
+              transparent
+              onPress={this.showActionSheet}
             >
-            <Icon name='home' />
+              <Icon name='more' />
             </Button>
-            <Button transparent
-              //onPress={() => this.props.navigation.openDrawer()}
-            >
-            <Icon name='eye' />
-            </Button>
-            <Button transparent
-              //onPress={() => this.props.navigation.openDrawer()}
-            >
-            <Icon name='logo-rss' />
-            </Button>
-            <Button transparent
-              //onPress={() => this.props.navigation.openDrawer()}
-            >
-            <Icon name='trending-up' />
-            </Button>
-            <Button transparent
-              //onPress={() => this.props.navigation.openDrawer()}
-            >
-            <Icon name='chatbubbles' />
-            </Button>            
-            <Button transparent
-              //onPress={() => this.props.navigation.openDrawer()}
-            >
-            <Icon name='search' />
-            </Button>
+          </Right>
         </Header>
+        <ActionSheet
+          ref={o => this.ActionSheet = o}
+          //title={'Which one do you like ?'}
+          options={['Login', 'About deeqBloq', 'cancel']}
+          cancelButtonIndex={2}
+          //destructiveButtonIndex={1}
+          onPress={(index) => { /* do something */ }}
+        />
+      </View>
     );
   }
 }
