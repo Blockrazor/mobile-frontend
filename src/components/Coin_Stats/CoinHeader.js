@@ -13,6 +13,25 @@ export default class CoinHeader extends Component {
   showActionSheet = () => {
     this.ActionSheet.show()
   }
+
+  _onPressActionList = (index) =>{
+    
+    switch(index) {
+      case 0:
+        // Login
+        break;
+      case 1:
+        // About
+      this.props.navigation.navigate('About');
+        break;
+      case 2:
+        // cancel
+      break;
+      default:
+        // code block
+    }
+  }
+
   render() {
     return (
       <View>
@@ -39,7 +58,7 @@ export default class CoinHeader extends Component {
           options={['Login', 'About deeqBloq', 'cancel']}
           cancelButtonIndex={2}
           //destructiveButtonIndex={1}
-          onPress={(index) => { /* do something */ }}
+          onPress={this._onPressActionList}
         />
       </View>
     );
