@@ -1,14 +1,13 @@
 import React, { Component} from 'react';
-import {Platform, StatusBar} from 'react-native';
-import { getStatusBarHeight } from 'react-native-status-bar-height';
-import { Tab, Tabs, TabHeading, Content, Container, Icon, Text, Header, ScrollableTab} from 'native-base';
+import {Platform} from 'react-native';
+import { Tab, Tabs, TabHeading, Container, Icon, Text, ScrollableTab} from 'native-base';
 import Overview from '../components/Coin_Stats/CoinOverview';
 import News from '../components/Coin_Stats/CoinNews';
 import Comment from '../components/Coin_Stats/CoinComment';
 import Wall from '../components/Coin_Stats/CoinWall';
 import CoinFooter from '../components/Coin_Stats/CoinFooter';
 import Search from '../components/Coin_Stats/CoinSearch';
-
+import CoinHeader from '../components/Coin_Stats/CoinHeader';
 
 export default class HomeScreen extends Component {
   constructor(props) {
@@ -28,10 +27,10 @@ export default class HomeScreen extends Component {
   render() {
     return (
       <Container>
+        <CoinHeader />
           <Tabs 
-            style={{
-            marginTop: getStatusBarHeight()}}
-            renderTabBar={()=> <ScrollableTab />}
+            style={Platform.OS === 'android' ? { overflow: 'hidden' } : null}
+            //renderTabBar={()=> <ScrollableTab />}
             onChangeTab={({i}) => this.setState({currentPage: i})} 
             //ref={(c) => { this.tabs = c; return; }} initialPage={1}
             >
@@ -52,10 +51,10 @@ export default class HomeScreen extends Component {
           <Tab heading={ <TabHeading><Icon name='albums' /></TabHeading>}>
             <Wall />
           </Tab>
-          <Tab heading={ <TabHeading><Icon name='contact' /></TabHeading>}>
+          {/* <Tab heading={ <TabHeading><Icon name='contact' /></TabHeading>}>
           </Tab>
           <Tab heading={ <TabHeading><Icon name='information-circle' /></TabHeading>}>
-          </Tab>
+          </Tab> */}
         </Tabs>
         {this._footer()}
       </Container>
