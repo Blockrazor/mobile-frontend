@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View , Platform, StatusBar} from 'react-native';
 import { Header, Left, Right, Body, Title, Button, Icon, Text } from 'native-base';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import ActionSheet from 'react-native-actionsheet'
@@ -18,9 +18,8 @@ export default class CoinHeader extends Component {
       <View>
         <Header
           hasTabs
-          style={{
-            marginTop: getStatusBarHeight()
-          }}>
+          style={{marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}
+            >
           <Left />
           <Body>
             <Title>deepBloq</Title>
