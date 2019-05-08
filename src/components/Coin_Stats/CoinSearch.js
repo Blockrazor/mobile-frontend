@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, ScrollView } from 'react-native';
-import { Content, Icon, Text, Header, Item, Input, Button, List, ListItem} from 'native-base';
+import { Content, Icon, Text, Header, Item, Input, Button, List, ListItem , InputGroup } from 'native-base';
+import { Col, Row, Grid } from 'react-native-easy-grid';
 
 export default class CoinSearch extends Component {
   constructor(props) {
@@ -11,16 +12,23 @@ export default class CoinSearch extends Component {
 
   render() {
     return (
-        <View>
-        <Header searchBar rounded>
-          <Item>
+        <Grid>
+        <Row size={10}>
+          <Grid>
+          <Col size={75}>
+          <InputGroup>
             <Icon name="ios-search" />
             <Input placeholder="Search a Coin" />
-          </Item>
+          </InputGroup>
+          </Col>
+          <Col size={25}>
           <Button transparent>
             <Text>Search</Text>
           </Button>
-        </Header>
+          </Col>
+          </Grid>
+        </Row>
+        <Row size={90}>
         <ScrollView>
         <List>
             <ListItem>
@@ -61,7 +69,8 @@ export default class CoinSearch extends Component {
             </ListItem>
           </List>
         </ScrollView>
-        </View>
+        </Row>
+        </Grid>
     );
   }
 }
