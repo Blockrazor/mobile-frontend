@@ -29,7 +29,13 @@ export default class HomeScreen extends Component {
       <Container>
         <CoinHeader />
           <Tabs 
-            style={Platform.OS === 'android' ? { overflow: 'hidden' } : null}
+            style={
+              Platform.OS === 'android' ? { overflow: 'hidden', 
+              //marginTop: getStatusBarHeight() 
+              } : {
+              //marginTop: getStatusBarHeight()
+              }
+            }
             //renderTabBar={()=> <ScrollableTab />}
             onChangeTab={({i}) => this.setState({currentPage: i})} 
             //ref={(c) => { this.tabs = c; return; }} initialPage={1}
