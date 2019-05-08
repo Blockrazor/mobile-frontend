@@ -23,7 +23,7 @@ export default class AboutHeader extends Component {
             </Button>
             </Left>
           <Body>
-            <Title>About deepBloq</Title>
+            <Title>About</Title>
           </Body>
           <Right>
           </Right>
