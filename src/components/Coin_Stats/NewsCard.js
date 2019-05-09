@@ -12,7 +12,7 @@ export default class NewsCard extends Component {
     render() {
         return (
             <View>
-                <Card>
+                <Card button onPress={() => alert("Check details")}>
                     <CardItem header>
                         <Left>
                             <Thumbnail source={{ uri: 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579' }} />
@@ -21,7 +21,7 @@ export default class NewsCard extends Component {
                             </Body>
                         </Left>
                     </CardItem>
-                    <CardItem>
+                    <CardItem button onPress={() => alert("Check details")} onLongPress={() => alert("Remove")}>
                         <Text note>{this.props.content}</Text>
                     </CardItem>
                 </Card>
