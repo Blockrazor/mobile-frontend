@@ -3,6 +3,7 @@ import { View , Platform, StatusBar, Image} from 'react-native';
 import { Header, Left, Right, Body, Title, Button, Icon, Text } from 'native-base';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import ActionSheet from 'react-native-actionsheet'
+import AppStyle from "../AppStyle";
 
 export default class CoinHeader extends Component {
   constructor(props) {
@@ -37,7 +38,7 @@ export default class CoinHeader extends Component {
       return <Image source={require('../../assets/images/logo/whitelogo.png')} resizeMode="contain" style={{ width: 130, height: 30}}  />
     }
     else{
-      return <Image source={require('../../assets/images/logo/darklogo.png')} resizeMode="contain" style={{ width: 130, height: 30}}  />
+      return <Image source={require('../../assets/images/logo/whitelogo.png')} resizeMode="contain" style={{ width: 130, height: 30}}  />
     }
   }
   render() {
@@ -45,7 +46,7 @@ export default class CoinHeader extends Component {
       <View>
         <Header
           hasTabs
-          style={{marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}
+          style={AppStyle.headerDark} 
             >
           <Left >
           {this._renderIcon()}
