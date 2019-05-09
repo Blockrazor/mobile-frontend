@@ -32,7 +32,14 @@ export default class CoinHeader extends Component {
         // code block
     }
   }
-
+  _renderIcon(){
+    if(Platform.OS == 'android'){
+      return <Image source={require('../../assets/images/logo/whitelogo.png')} resizeMode="contain" style={{ width: 130, height: 30}}  />
+    }
+    else{
+      return <Image source={require('../../assets/images/logo/darklogo.png')} resizeMode="contain" style={{ width: 130, height: 30}}  />
+    }
+  }
   render() {
     return (
       <View>
@@ -41,8 +48,8 @@ export default class CoinHeader extends Component {
           style={{marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}
             >
           <Left >
-          <Image source={require('../../assets/images/logo/whitelogo.png')} resizeMode="contain" style={{ width: 130, height: 30}}  />
-            </Left>
+          {this._renderIcon()}
+          </Left>
           <Body>
           </Body>
           <Right>
