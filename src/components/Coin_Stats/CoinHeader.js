@@ -19,6 +19,7 @@ export default class CoinHeader extends Component {
     switch(index) {
       case 0:
         // Login
+      this.props.navigation.navigate('Auth');
         break;
       case 1:
         // About
@@ -55,7 +56,7 @@ export default class CoinHeader extends Component {
         <ActionSheet
           ref={o => this.ActionSheet = o}
           //title={'Which one do you like ?'}
-          options={['Login', 'About deeqBloq', 'cancel']}
+          options={['Login/Sign Up', 'About deeqBloq', 'Cancel']}
           cancelButtonIndex={2}
           //destructiveButtonIndex={1}
           onPress={this._onPressActionList}

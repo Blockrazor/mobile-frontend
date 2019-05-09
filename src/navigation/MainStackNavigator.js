@@ -1,6 +1,5 @@
 import React from 'react';
-import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator , createDrawerNavigator} from 'react-navigation';
+import { createStackNavigator} from 'react-navigation';
 
 import HomeScreen from '../screens/HomeScreen';
 import AboutScreen from '../screens/AboutScreen';
@@ -22,16 +21,16 @@ const HomeStack = createStackNavigator(
   }
 );
 
-HomeStack.navigationOptions = {
-  drawerLabel: 'Home',
-  drawerIcon: ({ tintColor }) => (
-    <Icon name='home'/>
-  ),
-};
+// HomeStack.navigationOptions = {
+//   drawerLabel: 'Home',
+//   drawerIcon: ({ tintColor }) => (
+//     <Icon name='home'/>
+//   ),
+// };
 
-const Drawer = createDrawerNavigator(
-  {
-    HomeStack
-  }
-);
+// const Drawer = createDrawerNavigator(
+//   {
+//     HomeStack
+//   }
+// );
 export default HomeStack;
