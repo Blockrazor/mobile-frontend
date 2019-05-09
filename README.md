@@ -12,4 +12,7 @@ A mobile frontend for Blockrazor
 - Run `expo start`
 
 
+** There are some performance issue(laggy when changing tab) when running in development mode on android,
+you may select production mode in the expo-cli before running the app on a device.
+
 
