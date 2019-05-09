@@ -12,7 +12,7 @@ export default class PriceCard extends Component {
     render() {
         return (
             <List>
-                <ListItem>
+                <ListItem style={{ marginLeft: 0, paddingLeft: 15 }}>
                     <Grid style={{alignItems:'center', justifyContent: 'center'}}>
                         <Col>
                             <Thumbnail source={{ uri: 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579' }} />
@@ -27,7 +27,7 @@ export default class PriceCard extends Component {
                         </Col>
                     </Grid>
                 </ListItem>
-                <ListItem>
+                <ListItem style={{ marginLeft: 0, paddingLeft: 15 }}>
                     <Grid>
                         <Col>
                             <Text>1.000</Text>

@@ -8,6 +8,7 @@ import Wall from '../components/Coin_Stats/CoinWall';
 import CoinFooter from '../components/Coin_Stats/CoinFooter';
 import Search from '../components/Coin_Stats/CoinSearch';
 import CoinHeader from '../components/Coin_Stats/CoinHeader';
+import Price from '../components/Coin_Stats/CoinPrice';
 
 export default class HomeScreen extends Component {
   constructor(props) {
@@ -47,6 +48,7 @@ export default class HomeScreen extends Component {
             <News />
           </Tab>
           <Tab heading={ <TabHeading><Icon name='trending-up' /></TabHeading>}>
+            <Price />
           </Tab>
           <Tab heading={ <TabHeading><Icon name="chatbubbles" /></TabHeading>}>
             <Comment />
@@ -57,10 +59,6 @@ export default class HomeScreen extends Component {
           <Tab heading={ <TabHeading><Icon name='albums' /></TabHeading>}>
             <Wall />
           </Tab>
-          {/* <Tab heading={ <TabHeading><Icon name='contact' /></TabHeading>}>
-          </Tab>
-          <Tab heading={ <TabHeading><Icon name='information-circle' /></TabHeading>}>
-          </Tab> */}
         </Tabs>
         {this._footer()}
       </Container>
