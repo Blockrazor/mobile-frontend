@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View , Platform, StatusBar} from 'react-native';
+import { View , Platform, StatusBar, Image} from 'react-native';
 import { Header, Left, Right, Body, Title, Button, Icon, Text } from 'native-base';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import ActionSheet from 'react-native-actionsheet'
@@ -40,9 +40,10 @@ export default class CoinHeader extends Component {
           hasTabs
           style={{marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}
             >
-          <Left />
+          <Left >
+          <Image source={require('../../assets/images/logo/whitelogo.png')} resizeMode="contain" style={{ width: 130, height: 30}}  />
+            </Left>
           <Body>
-            <Title>deepBloq</Title>
           </Body>
           <Right>
             <Button

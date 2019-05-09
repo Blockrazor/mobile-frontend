@@ -30,7 +30,8 @@ export default class App extends React.Component {
   _loadResourcesAsync = async () => {
     return Promise.all([
       Asset.loadAsync([
-        // require('./src/assets/images/robot-dev.png'),
+         require('./src/assets/images/logo/deepBloqLogo.jpg'),
+         require('./src/assets/images/logo/whitelogo.png'),
         // require('./src/assets/images/robot-prod.png'),
       ]),
       Font.loadAsync({

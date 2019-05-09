@@ -20,7 +20,7 @@ export default class AboutScreen extends Component {
                     <List style={{ flex: 0 }}>
                         <ListItem>
                             <Left>
-                                <Thumbnail square source={{ uri: 'https://www.gannett-cdn.com/-mm-/15c2ce3e0bbadba03bbcdc762ff5c40c4a915fec/c=0-29-580-355/local/-/media/2018/11/19/USATODAY/usatsports/MotleyFool-TMOT-c77f5cc8-bitcoin-gbtc_large.jpg?width=3200&height=1680&fit=crop' }} />
+                                <Thumbnail square source={require('../assets/images/logo/deepBloqLogo.jpg') } />
                                 <Body>
                                     <Text>deepBloq</Text>
                                     <Text></Text>
