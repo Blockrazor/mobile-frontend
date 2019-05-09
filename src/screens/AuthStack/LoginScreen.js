@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Platform, StatusBar } from 'react-native';
 import { Container, Header, Content, Form, Item, Input, Label, Button, Text, Left, Body, Right, Icon, Title } from 'native-base';
-
+import AndroidBack from  '../../components/AndroidBack';
 
 export default class LoginScreen extends Component {
     constructor(props) {
@@ -40,6 +40,7 @@ export default class LoginScreen extends Component {
     render() {
         return (
             <Container>
+                <AndroidBack navigation={this.props.navigation} />
                 <Header
                     hasTabs
                     style={{ marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0 }}

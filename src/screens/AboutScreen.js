@@ -2,17 +2,19 @@ import React, { Component } from 'react';
 import { View, Image } from 'react-native';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Button, Icon, Left, Body } from 'native-base';
 import AboutHeader from '../components/About/AboutHeader';
+import AndroidBack from  '../components/AndroidBack';
 
 export default class AboutScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
         };
-    }
+    }  
 
     render() {
         return (
             <Container>
+                <AndroidBack navigation={this.props.navigation}/>
                 <AboutHeader navigation={this.props.navigation} />
                 <Content>
                     <List style={{ flex: 0 }}>

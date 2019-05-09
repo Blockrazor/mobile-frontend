@@ -17,6 +17,7 @@ import {
   Icon
 } from "native-base";
 import LoginHeader from '../../components/Login/LoginHeader';
+import AndroidBack from  '../../components/AndroidBack';
 
 export default class SignUpScreen extends Component {
   constructor(props) {
@@ -83,6 +84,7 @@ export default class SignUpScreen extends Component {
   render() {
     return (
       <Container>
+        <AndroidBack navigation={this.props.navigation} />
         <LoginHeader title="Sign Up" navigation={this.props.navigation} />
         <Content>
           <Form>

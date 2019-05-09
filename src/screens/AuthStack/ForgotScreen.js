@@ -17,6 +17,7 @@ import {
     Icon
 } from "native-base";
 import LoginHeader from '../../components/Login/LoginHeader';
+import AndroidBack from  '../../components/AndroidBack';
 
 export default class ForgotScreen extends Component {
     constructor(props) {
@@ -59,6 +60,7 @@ export default class ForgotScreen extends Component {
     render() {
         return (
             <Container>
+                <AndroidBack navigation={this.props.navigation} />
                 <LoginHeader title="Forgot Password" navigation={this.props.navigation} />
                 <Content>
                     <Form>
