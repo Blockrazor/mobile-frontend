@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Platform } from 'react-native';
 import { ListItem, Icon, Header, Left, Body, Text, Right, Thumbnail, Card, CardItem, Segment, Button, Content, Container, Footer, FooterTab } from 'native-base';
-
+import AppStyle from "../AppStyle";
 
 export default class CointFooter extends Component {
     constructor(props) {
@@ -12,12 +12,12 @@ export default class CointFooter extends Component {
     render() {
         return (
             <Footer>
-            <FooterTab>
-            <Button full danger>
-                <Icon name='close-circle' style={{color: 'white'}}/>
+            <FooterTab style={AppStyle.footerLight}>
+            <Button full>
+                <Icon name='close-circle' style={{color: '#d9534f' }}/>
               </Button>
-              <Button full success>
-                <Icon name='checkmark-circle' style={{color: 'white'}}/>
+              <Button full>
+                <Icon name='checkmark-circle' style={{color: '#5cb85c'}}/>
               </Button>
             </FooterTab>
             </Footer>

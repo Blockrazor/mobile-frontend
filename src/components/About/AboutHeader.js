@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, Platform, StatusBar} from 'react-native';
 import { Header, Icon, Text, Left, Right, Body, Button, Title} from 'native-base';
+import AppStyle from "../AppStyle";
+
 export default class AboutHeader extends Component {
   constructor(props) {
     super(props);
@@ -12,7 +14,7 @@ export default class AboutHeader extends Component {
     return (
         <Header
           hasTabs
-          style={{marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}
+          style={AppStyle.headerDark}
             >
           <Left>
           <Button
@@ -23,7 +25,7 @@ export default class AboutHeader extends Component {
             </Button>
             </Left>
           <Body>
-            <Title>About</Title>
+            <Title style={{color:'white'}}>About</Title>
           </Body>
           <Right>
           </Right>

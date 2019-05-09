@@ -9,6 +9,7 @@ import CoinFooter from '../components/Coin_Stats/CoinFooter';
 import Search from '../components/Coin_Stats/CoinSearch';
 import CoinHeader from '../components/Coin_Stats/CoinHeader';
 import Price from '../components/Coin_Stats/CoinPrice';
+import AppStyle from "../components/AppStyle";
 
 export default class HomeScreen extends Component {
   constructor(props) {
@@ -41,22 +42,22 @@ export default class HomeScreen extends Component {
             onChangeTab={({i}) => this.setState({currentPage: i})} 
             //ref={(c) => { this.tabs = c; return; }} initialPage={1}
             >
-          <Tab heading={ <TabHeading><Icon name='eye' /></TabHeading>}>
+          <Tab heading={ <TabHeading style={AppStyle.tabDark}><Icon name='eye' /></TabHeading>} >
             <Overview />
           </Tab>
-          <Tab heading={ <TabHeading><Icon name="logo-rss" /></TabHeading>}>
+          <Tab heading={ <TabHeading style={AppStyle.tabDark}><Icon name="logo-rss" /></TabHeading>}>
             <News />
           </Tab>
-          <Tab heading={ <TabHeading><Icon name='trending-up' /></TabHeading>}>
+          <Tab heading={ <TabHeading style={AppStyle.tabDark}><Icon name='trending-up' /></TabHeading>}>
             <Price />
           </Tab>
-          <Tab heading={ <TabHeading><Icon name="chatbubbles" /></TabHeading>}>
+          <Tab heading={ <TabHeading style={AppStyle.tabDark}><Icon name="chatbubbles" /></TabHeading>}>
             <Comment />
           </Tab>
-          <Tab heading={ <TabHeading><Icon name='search' /></TabHeading>}>
+          <Tab heading={ <TabHeading style={AppStyle.tabDark}><Icon name='search' /></TabHeading>}>
             <Search />
           </Tab>
-          <Tab heading={ <TabHeading><Icon name='albums' /></TabHeading>}>
+          <Tab heading={ <TabHeading style={AppStyle.tabDark}><Icon name='albums' /></TabHeading>}>
             <Wall />
           </Tab>
         </Tabs>

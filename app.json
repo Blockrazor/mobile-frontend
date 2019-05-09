@@ -10,7 +10,7 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/images/icon.png",
+    "icon": "./src/assets/images/logo/deepBloqLogo.jpg",
     "splash": {
       "image": "./src/assets/images/splash.png",
       "resizeMode": "contain",
