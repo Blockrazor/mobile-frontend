@@ -22,4 +22,14 @@ export default StyleSheet.create({
   tabLight: {
     backgroundColor: "#f7f7f7"
   },
+  priceList:{
+      flex: 1,
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+  },
+  priceNumber:{
+    fontSize: 40,
+    fontWeight: 'bold',
+  }
 });

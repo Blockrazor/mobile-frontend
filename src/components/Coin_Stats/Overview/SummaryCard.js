@@ -15,8 +15,7 @@ export default class SummaryCard extends Component {
                 <CardItem bordered>
                     <Body>
                         <Text>
-                            Bitcoin (BTC) is a consensus network that enables a new payment system and a completely digital currency. Powered by its users, it is a peer to peer payment network that requires no central authority to operate. On October 31st, 2008, an individual or group of individuals operating under the pseudonym "Satoshi Nakamoto" published the ...
-                </Text>
+                        Cardano (ADA) is a decentralized platform that will allow complex programmable transfers of value in a secure and scalable fashion. It is reportedly the first blockchain platform to evolve out of a scientific philosophy and a research-first driven approach, and one                 </Text>
                     </Body>
                 </CardItem>
             </Card>
