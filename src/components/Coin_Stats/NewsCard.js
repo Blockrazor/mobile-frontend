@@ -15,7 +15,7 @@ export default class NewsCard extends Component {
                 <Card button onPress={() => alert("Check details")}>
                     <CardItem header>
                         <Left>
-                            <Thumbnail source={{ uri: 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579' }} />
+                            <Thumbnail source={{ uri: this.props.img }} />
                             <Body>
                                 <Text>{this.props.title}</Text>
                             </Body>
