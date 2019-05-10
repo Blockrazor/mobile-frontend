@@ -10,9 +10,9 @@ import {
   Button,
   Title
 } from "native-base";
-import AppStyle from "../AppStyle";
+import AppStyle from "./AppStyle";
 
-export default class LoginHeader extends Component {
+export default class NormalHeader extends Component {
   constructor(props) {
     super(props);
     this.state = {

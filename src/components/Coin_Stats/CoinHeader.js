@@ -54,6 +54,18 @@ export default class CoinHeader extends Component {
           <Body>
           </Body>
           <Right>
+          <Button
+              transparent
+              onPress={()=>this.props.navigation.navigate("Search")}
+            >
+              <Icon name='search' />
+            </Button>
+            <Button
+              transparent
+              onPress={()=>this.props.navigation.navigate("Wall")}
+            >
+              <Icon name='notifications' />
+            </Button>
             <Button
               transparent
               onPress={this.showActionSheet}

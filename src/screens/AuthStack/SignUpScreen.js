@@ -16,7 +16,7 @@ import {
   Text,
   Icon
 } from "native-base";
-import LoginHeader from '../../components/Login/LoginHeader';
+import LoginHeader from '../../components/Header';
 import AndroidBack from  '../../components/AndroidBack';
 
 export default class SignUpScreen extends Component {
