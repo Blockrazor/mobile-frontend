@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Platform, StatusBar } from 'react-native';
 import { Container, Header, Content, Form, Item, Input, Label, Button, Text, Left, Body, Right, Icon, Title } from 'native-base';
 import AndroidBack from  '../../components/AndroidBack';
-import LoginHeader from '../../components/Login/LoginHeader';
+import LoginHeader from '../../components/Header';
 
 export default class LoginScreen extends Component {
     constructor(props) {

@@ -45,7 +45,7 @@ export default class HomeScreen extends Component {
           <Tab heading={ <TabHeading style={AppStyle.tabDark}><Icon name='eye' /></TabHeading>} >
             <Overview />
           </Tab>
-          <Tab heading={ <TabHeading style={AppStyle.tabDark}><Icon name="logo-rss" /></TabHeading>}>
+          <Tab heading={ <TabHeading style={AppStyle.tabDark}><Icon name="ios-paper" /></TabHeading>}>
             <News />
           </Tab>
           <Tab heading={ <TabHeading style={AppStyle.tabDark}><Icon name='trending-up' /></TabHeading>}>
@@ -54,12 +54,12 @@ export default class HomeScreen extends Component {
           <Tab heading={ <TabHeading style={AppStyle.tabDark}><Icon name="chatbubbles" /></TabHeading>}>
             <Comment />
           </Tab>
-          <Tab heading={ <TabHeading style={AppStyle.tabDark}><Icon name='search' /></TabHeading>}>
+          {/* <Tab heading={ <TabHeading style={AppStyle.tabDark}><Icon name='search' /></TabHeading>}>
             <Search />
           </Tab>
           <Tab heading={ <TabHeading style={AppStyle.tabDark}><Icon name='albums' /></TabHeading>}>
             <Wall />
-          </Tab>
+          </Tab> */}
         </Tabs>
         {this._footer()}
       </Container>

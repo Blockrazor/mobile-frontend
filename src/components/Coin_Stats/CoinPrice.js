@@ -27,7 +27,6 @@ export default class CoinsPrice extends Component {
       <Content>
         <List style={{ flex: 0 }}>
           <ListItem>
-
               <Thumbnail
                 source={{
                   uri:
@@ -49,6 +48,7 @@ export default class CoinsPrice extends Component {
             <View style={AppStyle.priceList}>
               <Text>Bitcoin Comparison Price</Text>
             </View>
+            <Button transparent ><Icon name='help-circle' /></Button>
           </ListItem>
           <ListItem>
             <View style={AppStyle.priceList}>
@@ -59,6 +59,7 @@ export default class CoinsPrice extends Component {
             <View style={AppStyle.priceList}>
               <Text>Price per Coin</Text>
             </View>
+            <Button transparent><Icon name='help-circle' /></Button>
           </ListItem>
           <ListItem>
             <View style={AppStyle.priceList}>
@@ -69,6 +70,7 @@ export default class CoinsPrice extends Component {
             <View style={AppStyle.priceList}>
               <Text>ADA per BTC</Text>
             </View>
+            <Button transparent><Icon name='help-circle' /></Button>
           </ListItem>
           <ListItem>
             <View style={AppStyle.priceList}>
@@ -79,6 +81,7 @@ export default class CoinsPrice extends Component {
             <View style={AppStyle.priceList}>
               <Text>Historical Price</Text>
             </View>
+            <Button transparent><Icon name='help-circle' /></Button>
           </ListItem>
           <ListItem>
           <Image
@@ -90,6 +93,7 @@ export default class CoinsPrice extends Component {
             <View style={AppStyle.priceList}>
               <Text>Coin Distribution</Text>
             </View>
+            <Button transparent><Icon name='help-circle' /></Button>
           </ListItem>
           <ListItem>
           <Image
