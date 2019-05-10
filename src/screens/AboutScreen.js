@@ -3,6 +3,7 @@ import { View, Image } from 'react-native';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Button, Icon, Left, Body } from 'native-base';
 import AboutHeader from '../components/About/AboutHeader';
 import AndroidBack from  '../components/AndroidBack';
+import { Constants, WebBrowser } from 'expo';
 
 export default class AboutScreen extends Component {
     constructor(props) {
@@ -33,27 +34,24 @@ export default class AboutScreen extends Component {
                         </ListItem>
                         <ListItem>
                             <Text>
-                                we are a non profit blockchain analysis bla blablablablablabla ablablabl
-                                on profit blockchain analysis bla blablablablablabla ababla ablablabla
-                                bla
+                                A non profit, community owned blockchain analysis project. We have an international network of Blockchain technology and financial service. 
+We are a group which would like to make use of the international network 
+and provide consulting service to the worldwide.
+                            </Text>
+                        </ListItem>
+                        <ListItem>
+                            <Text>
+                                In a world filled with inequality, we discover new ways of equality, in order to make the world a better place.
                             </Text>
                         </ListItem>
                         <ListItem itemDivider>
                             <Text>GitHub</Text>
                         </ListItem>
                         <ListItem>
-                            <Text>
-                                we are opensource project bla bla bla bla bla bla
-                                versio
-                                opensource project bla bl
-                                opensource project bla bl
-                            </Text>
-                        </ListItem>
-                        <ListItem>
                             <Left>
-                                <Button transparent textStyle={{ color: '#87838B' }}>
+                                <Button transparent textStyle={{ color: '#87838B' }} onPress={()=>{ WebBrowser.openBrowserAsync('https://github.com/Blockrazor/mobile-frontend'); }}>
                                     <Icon name="logo-github" />
-                                    <Text>1231 stars</Text>
+                                    <Text>197 stars</Text>
                                 </Button>
                             </Left>
                         </ListItem>
