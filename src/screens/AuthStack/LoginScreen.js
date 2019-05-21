@@ -143,7 +143,7 @@ class LoginScreen extends Component {
                 <Text>Email</Text>
               </ListItem>
               <ListItem>
-                <Text>{this.props.user.profile.email}</Text>
+                <Text>{this.props.user.emails[0].address}</Text>
               </ListItem>
               <ListItem itemDivider>
                 <Text>Role</Text>
