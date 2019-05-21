@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Platform, StatusBar } from "react-native";
+import { View, Platform, StatusBar, Image } from "react-native";
 import {
   Container,
   Header,
@@ -10,29 +10,45 @@ import {
   Label,
   Button,
   Text,
+  List,
+  ListItem,
   Left,
   Body,
   Right,
-  Icon,
-  Title
+  Thumbnail,
 } from "native-base";
 import AndroidBack from "../../components/AndroidBack";
 import LoginHeader from "../../components/Header";
 import Meteor, { Accounts } from "react-native-meteor";
-
+import { connect } from 'react-redux';
+import { setLoggedIn } from '../../redux/app-redux';
 //test1@test.com
 //testtest
 
 
-export default class LoginScreen extends Component {
+const mapStateToProps = (state) => {
+  return {
+    loggedIn: state.loggedIn,
+    user: state.user,
+  };
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setLoggedIn: (logging, user) => { dispatch(setLoggedIn(logging, user)) }
+  };
+}
+
+class LoginScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: "",
       password: "",
       error: null, // added this
-      user: Meteor.user(),
-      loading: false
+      user: this.props.user,
+      loading: false,
+      loggedIn: this.props.loggedIn,
     };
   }
   isValid() {
@@ -62,7 +78,7 @@ export default class LoginScreen extends Component {
           this.setState({ error: error.reason });
         } else {
           //alert("login success! id: " + Meteor.user()._id);
-          this.setState({ user: Meteor.user() });
+          this.props.setLoggedIn(true, Meteor.user());
         }
       });
     }
@@ -70,7 +86,7 @@ export default class LoginScreen extends Component {
 
   onLogoutPress() {
     Meteor.logout();
-    this.setState({ user: Meteor.user() });
+    this.props.setLoggedIn(false, Meteor.user());
   }
 
   renderButtonOrLoading() {
@@ -99,30 +115,61 @@ export default class LoginScreen extends Component {
   }
 
   render() {
-    if (this.state.user) {
+    if (this.props.loggedIn) {
       return (
         <Container>
           <AndroidBack navigation={this.props.navigation} />
           <LoginHeader
-            title="Login"
+            title="Profile"
             navigation={this.props.navigation}
             dest="Main"
           />
           <Content>
-            <Text>{this.state.user._id}</Text>
-            <Text> you are logged in!</Text>
-            <Button onPress={this.onLogoutPress.bind(this)}>
-              <Text>Log Out</Text>
-            </Button>
-            <Button
-              onPress={() =>
-                Meteor.call("signedUpLastMonth", (err, data) => {
-                  alert(data);
-                })
-              }
-            >
-              <Text>Sign Up last month</Text>
-            </Button>
+            <List>
+              <ListItem itemDivider>
+                <Left>
+                <Text>{this.props.user.username}</Text>
+                </Left>
+              </ListItem>
+              <ListItem>
+                <Button transparent onPress={this.onLogoutPress.bind(this)}>
+                  <Text>Log Out</Text>
+                </Button>
+              </ListItem>
+              <ListItem>
+                <Thumbnail source={{ uri: 'https://blockrazor.org/codebase_images/noprofile.png' }} />
+              </ListItem>
+              <ListItem itemDivider>
+                <Text>Email</Text>
+              </ListItem>
+              <ListItem>
+                <Text>{this.props.user.profile.email}</Text>
+              </ListItem>
+              <ListItem itemDivider>
+                <Text>Role</Text>
+              </ListItem>
+              <ListItem>
+                <Text>{this.props.user.emails[0].address}</Text>
+              </ListItem>
+              <ListItem itemDivider>
+                <Text>About Me</Text>
+              </ListItem>
+              <ListItem>
+                <Text>{this.props.user.emails[0].address}</Text>
+              </ListItem>
+              <ListItem itemDivider>
+                <Text>Input Ranking</Text>
+              </ListItem>
+              <ListItem>
+                <Text>{this.props.user.emails[0].address}</Text>
+              </ListItem>
+              <ListItem itemDivider>
+                <Text>Overall rating for possible moderators</Text>
+              </ListItem>
+              <ListItem>
+                <Text>{this.props.user.emails[0].address}</Text>
+              </ListItem>
+            </List>
           </Content>
         </Container>
       );
@@ -160,3 +207,5 @@ export default class LoginScreen extends Component {
     );
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);

@@ -4,15 +4,16 @@ import thunkMiddleware from 'redux-thunk';
 //Initial State
 
 const InitialState = {
-    loggingin: false,
+    loggedIn: false,
+    user: null,
 };
 
 //Reducer
 
 const reducer = (state = InitialState, action) => {
     switch(action.type){
-        case "setLoggingIn":
-            return { ...state, loggingin: action.value}
+        case "setLoggedIn":
+            return { ...state, loggedIn: action.loggedIn, user: action.user}
         default: return state;
     }
 
@@ -25,12 +26,12 @@ export { store };
 
 
 //action creator
-const setLoggingIn = (logging) => {
+const setLoggedIn = (logging, user) => {
     return {
-        type: "setLoggingIn",
-        value: logging,
-
+        type: "setLoggedIn",
+        loggedIn: logging,
+        user: user,
     }
 }
 
-export {setLoggingIn};
+export {setLoggedIn};
