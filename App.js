@@ -3,7 +3,7 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './src/navigation/AppNavigator';
 import { Provider } from 'react-redux';
-import { store } from './redux/app-redux';
+import { store } from './src/redux/app-redux';
 import Meteor, { connectMeteor } from 'react-native-meteor';
 
 export default class App extends React.Component {
