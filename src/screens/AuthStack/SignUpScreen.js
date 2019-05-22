@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, ActivityIndicator, Platform, StatusBar } from "react-native";
+import { View, ActivityIndicator, Platform, StatusBar ,DeviceEventEmitter } from "react-native";
 import {
   Content,
   Container,
@@ -17,9 +17,10 @@ import {
   Icon
 } from "native-base";
 import LoginHeader from '../../components/Header';
-import AndroidBack from  '../../components/AndroidBack';
+import AndroidBack from '../../components/AndroidBack';
+import Meteor, { Accounts } from "react-native-meteor";
 
-export default class SignUpScreen extends Component {
+class SignUpScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -31,7 +32,18 @@ export default class SignUpScreen extends Component {
     };
   }
   onSignUpPress() {
-
+    Accounts.createUser({
+      username: this.state.email,
+      email: this.state.email,
+      password: this.state.password
+    }, (err) => {
+      if (!err) {
+        DeviceEventEmitter.emit('showToast', "sign up successful!");
+      } else {
+        this.setState({ error: err.reason });
+        DeviceEventEmitter.emit('showToast', err.reason);
+      }
+    })
   }
 
   renderButtonOrLoading() {
@@ -64,6 +76,7 @@ export default class SignUpScreen extends Component {
               <Text note>Password not match</Text>
             </Body>
           </Left>
+
           <Button transparent disabled>
             <Text>Sign Up</Text>
           </Button>
@@ -115,10 +128,16 @@ export default class SignUpScreen extends Component {
             </Item>
           </Form>
           <Text />
-          <Text />
+          <Left>
+            <Body>
+              <Text note>{this.state.error}</Text>
+            </Body>
+          </Left>
           {this.renderButtonOrLoading()}
         </Content>
       </Container>
     );
   }
 }
+
+export default SignUpScreen;

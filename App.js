@@ -1,10 +1,11 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View, DeviceEventEmitter } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './src/navigation/AppNavigator';
 import { Provider } from 'react-redux';
 import { store } from './src/redux/app-redux';
 import Meteor, { connectMeteor } from 'react-native-meteor';
+import Toast, { DURATION } from 'react-native-easy-toast';
 
 export default class App extends React.Component {
 
@@ -16,6 +17,18 @@ export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
   };
+
+  componentWillUnmount() {
+    // Don't forget to unsubscribe when the component unmounts
+    if (this.listener) {
+      this.listener.remove();
+    }
+  }
+  componentDidMount() {
+    this.listener = DeviceEventEmitter.addListener('showToast', (text) => {
+      this.refs.toast.show(text, 5000);
+    });
+  }
 
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
@@ -32,6 +45,7 @@ export default class App extends React.Component {
           <View style={styles.container}>
             {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
             <AppNavigator />
+            <Toast ref="toast" />
           </View>
         </Provider>
       );

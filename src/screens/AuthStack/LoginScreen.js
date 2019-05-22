@@ -200,7 +200,7 @@ class LoginScreen extends Component {
               />
             </Item>
           </Form>
-          <Text>{this.state.error}</Text>
+          <Text note>{this.state.error}</Text>
           {this.renderButtonOrLoading()}
         </Content>
       </Container>
