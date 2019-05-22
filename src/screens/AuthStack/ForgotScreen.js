@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, ActivityIndicator, Platform, StatusBar } from "react-native";
+import { View, ActivityIndicator, Platform, StatusBar,DeviceEventEmitter  } from "react-native";
 import {
     Content,
     Container,
@@ -18,6 +18,7 @@ import {
 } from "native-base";
 import LoginHeader from '../../components/Header';
 import AndroidBack from  '../../components/AndroidBack';
+import Meteor, { Accounts } from "react-native-meteor";
 
 export default class ForgotScreen extends Component {
     constructor(props) {
@@ -28,8 +29,14 @@ export default class ForgotScreen extends Component {
             loading: false
         };
     }
-    onForgotPress() {
-
+    onForgotPress = ()=> {
+        Accounts.forgotPassword({ email: this.state.email }, function (err) {
+            if (err) {
+                DeviceEventEmitter.emit('showToast', err.message);
+            } else {
+                DeviceEventEmitter.emit('showToast', "email is sent to your mail box");
+            }
+        })
     }
 
     renderButtonOrLoading() {
@@ -50,7 +57,7 @@ export default class ForgotScreen extends Component {
         //everything is ok
         return (
             <View>
-                <Button transparent onPress={this.onForgotPress.bind(this)}>
+                <Button transparent onPress={this.onForgotPress}>
                     <Text>Send Password Reset Email</Text>
                 </Button>
             </View>
