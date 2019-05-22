@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Platform, StatusBar, Image } from "react-native";
+import { View, Platform, StatusBar, Image ,DeviceEventEmitter} from "react-native";
 import {
   Container,
   Header,
@@ -74,7 +74,7 @@ class LoginScreen extends Component {
     if (this.isValid()) {
       Meteor.loginWithPassword(email, password, error => {
         if (error) {
-          alert(error.reason);
+          DeviceEventEmitter.emit('showToast', error.reason);
           this.setState({ error: error.reason });
         } else {
           //alert("login success! id: " + Meteor.user()._id);
@@ -200,7 +200,11 @@ class LoginScreen extends Component {
               />
             </Item>
           </Form>
-          <Text note>{this.state.error}</Text>
+          <Left>
+            <Body>
+             <Text note>{this.state.error}</Text>
+            </Body>
+          </Left>
           {this.renderButtonOrLoading()}
         </Content>
       </Container>
