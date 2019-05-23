@@ -22,6 +22,8 @@ import LoginHeader from "../../components/Header";
 import Meteor, { Accounts } from "react-native-meteor";
 import { connect } from 'react-redux';
 import { setLoggedIn } from '../../redux/app-redux';
+import Profile from '../../components/Profile';
+
 //test1@test.com
 //testtest
 
@@ -117,61 +119,7 @@ class LoginScreen extends Component {
   render() {
     if (this.props.loggedIn) {
       return (
-        <Container>
-          <AndroidBack navigation={this.props.navigation} />
-          <LoginHeader
-            title="Profile"
-            navigation={this.props.navigation}
-            dest="Main"
-          />
-          <Content>
-            <List>
-              <ListItem itemDivider>
-                <Left>
-                <Text>{this.props.user.username}</Text>
-                </Left>
-              </ListItem>
-              <ListItem>
-                <Button transparent onPress={this.onLogoutPress.bind(this)}>
-                  <Text>Log Out</Text>
-                </Button>
-              </ListItem>
-              <ListItem>
-                <Thumbnail source={{ uri: 'https://blockrazor.org/codebase_images/noprofile.png' }} />
-              </ListItem>
-              <ListItem itemDivider>
-                <Text>Email</Text>
-              </ListItem>
-              <ListItem>
-                <Text>{this.props.user.emails[0].address}</Text>
-              </ListItem>
-              <ListItem itemDivider>
-                <Text>Role</Text>
-              </ListItem>
-              <ListItem>
-                <Text>{this.props.user.emails[0].address}</Text>
-              </ListItem>
-              <ListItem itemDivider>
-                <Text>About Me</Text>
-              </ListItem>
-              <ListItem>
-                <Text>{this.props.user.emails[0].address}</Text>
-              </ListItem>
-              <ListItem itemDivider>
-                <Text>Input Ranking</Text>
-              </ListItem>
-              <ListItem>
-                <Text>{this.props.user.emails[0].address}</Text>
-              </ListItem>
-              <ListItem itemDivider>
-                <Text>Overall rating for possible moderators</Text>
-              </ListItem>
-              <ListItem>
-                <Text>{this.props.user.emails[0].address}</Text>
-              </ListItem>
-            </List>
-          </Content>
-        </Container>
+        <Profile navigation={this.props.navigation}/>
       );
     }
     return (

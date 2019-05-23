@@ -16,8 +16,6 @@ const reducer = (state = InitialState, action) => {
             return { ...state, loggedIn: action.loggedIn, user: action.user}
         default: return state;
     }
-
-    return state;
 };
 
 //Store
