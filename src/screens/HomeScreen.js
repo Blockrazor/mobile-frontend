@@ -4,12 +4,11 @@ import { Tab, Tabs, TabHeading, Container, Icon, Text, ScrollableTab, Button} fr
 import Overview from '../components/Coin_Stats/CoinOverview';
 import News from '../components/Coin_Stats/CoinNews';
 import Comment from '../components/Coin_Stats/CoinComment';
-import Wall from '../components/Coin_Stats/CoinWall';
 import CoinFooter from '../components/Coin_Stats/CoinFooter';
-import Search from '../components/Coin_Stats/CoinSearch';
 import CoinHeader from '../components/Coin_Stats/CoinHeader';
 import Price from '../components/Coin_Stats/CoinPrice';
 import AppStyle from "../components/AppStyle";
+import AllCoins from '../components/AllCoins';
 
 export default class HomeScreen extends Component {
   constructor(props) {
@@ -54,12 +53,12 @@ export default class HomeScreen extends Component {
           <Tab heading={ <TabHeading style={AppStyle.tabDark}><Icon name="chatbubbles" /></TabHeading>}>
             <Comment />
           </Tab>
-          {/* <Tab heading={ <TabHeading style={AppStyle.tabDark}><Icon name='search' /></TabHeading>}>
-            <Search />
+          <Tab heading={ <TabHeading style={AppStyle.tabDark}><Icon name='search' /></TabHeading>}>
+            <AllCoins />
           </Tab>
-          <Tab heading={ <TabHeading style={AppStyle.tabDark}><Icon name='albums' /></TabHeading>}>
+          {/* <Tab heading={ <TabHeading style={AppStyle.tabDark}><Icon name='albums' /></TabHeading>}>
             <Wall />
-          </Tab> */}
+          </Tab>  */}
         </Tabs>
         {this._footer()}
       </Container>

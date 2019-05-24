@@ -19,7 +19,7 @@ export default class NormalHeader extends Component {
     };
   }
 
-  _renderbutton() {
+  _renderleftbutton() {
     if (this.props.dest == undefined) {
       return <Button transparent onPress={() => this.props.navigation.goBack()}>
         <Icon name="arrow-back" />
@@ -31,7 +31,9 @@ export default class NormalHeader extends Component {
     </Button>;
     }
   }
-
+  _renderrightbutton() {
+      return;
+  }
   render() {
     return (
       <Header
@@ -39,12 +41,14 @@ export default class NormalHeader extends Component {
         style={AppStyle.headerDark}
       >
         <Left>
-          {this._renderbutton()}
+          {this._renderleftbutton()}
         </Left>
         <Body>
           <Title style={{ color: "white" }}>{this.props.title}</Title>
         </Body>
-        <Right />
+        <Right>
+          {this._renderrightbutton()}
+        </Right>
       </Header>
     );
   }
