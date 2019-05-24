@@ -107,10 +107,28 @@ class Profile extends Component {
               <Text>{this.props.user.emails[0].address}</Text>
             </ListItem>
             <ListItem itemDivider>
-              <Text>Balance</Text>
+              <Text>Krazor Balance</Text>
             </ListItem>
             <ListItem>
               <Text>{this.props.userdata.balance}</Text>
+            </ListItem>
+            <ListItem itemDivider>
+              <Text>USD Balance</Text>
+            </ListItem>
+            <ListItem>
+              <Text>{this.props.userdata.others.USD}</Text>
+            </ListItem>
+            <ListItem itemDivider>
+              <Text>ETH Balance</Text>
+            </ListItem>
+            <ListItem>
+              <Text>{this.props.userdata.others.ETH}</Text>
+            </ListItem>
+            <ListItem itemDivider>
+              <Text>XMR Balance</Text>
+            </ListItem>
+            <ListItem>
+              <Text>{this.props.userdata.others.XMR}</Text>
             </ListItem>
             <ListItem itemDivider>
               <Text>Input Ranking</Text>
@@ -127,6 +145,7 @@ class Profile extends Component {
 
 export default withTracker(params => {
   const handle = Meteor.subscribe("userdata");
+
   return {
     userdataReady: handle.ready(),
     userdata: Meteor.collection("userdata").findOne({ _id: Meteor.user()._id })

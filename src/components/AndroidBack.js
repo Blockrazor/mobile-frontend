@@ -8,13 +8,13 @@ export default class AndroidBack extends Component {
         };
     }
     onBackButtonPressAndroid = () => {
-        if (this.props.navigation.state.routeName == "About" ||this.props.navigation.state.routeName == "Forgot" ||this.props.navigation.state.routeName == "SignUp" ) {
-            this.props.navigation.goBack();
-            return true;
-        }
         if(this.props.navigation.state.routeName == "Login")
         {
             this.props.navigation.navigate("Main");
+            return true;
+        }
+        else{
+            this.props.navigation.goBack();
             return true;
         }
         return false;
