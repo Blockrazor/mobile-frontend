@@ -11,7 +11,8 @@ import {
   Content,
   Icon,
   Button,
-  Title,
+  Card,
+  CardItem,
   Text,
   List,
   ListItem,
@@ -20,6 +21,7 @@ import {
   Right,
   Thumbnail
 } from "native-base";
+import { Col, Row, Grid } from "react-native-easy-grid";
 
 class AllCoins extends Component {
   constructor(props) {
@@ -29,7 +31,20 @@ class AllCoins extends Component {
     };
   }
 
-  componentWillMount() {}
+  _onSummaryPress = (slug)=>{
+    this.props.navigation.navigate('CoinSummary', {currencySlug: slug});
+  }
+
+
+  _onFeaturePress = (slug)=>{
+    this.props.navigation.navigate('CoinFeatures', {currencySlug: slug});
+  }
+
+
+  _onRedFlagPress = (slug, id)=>{
+    this.props.navigation.navigate('CoinRedFlag', {currencySlug: slug,  currencyId: id});
+  }
+
 
   render() {
     if (!this.props.dataReady) {
@@ -37,26 +52,54 @@ class AllCoins extends Component {
     }
     return (
       <Container>
-        <List>
+        <Content>
           <MeteorListView
             collection="currencies"
-            options={{ sort: { createdAt: -1 } }}
+            options={{ sort: { eloRanking: -1 } }}
             renderRow={coin => {
               return (
-                <View>
-                  <ListItem style={{ marginLeft: 0, paddingLeft: 15 }}>
+                <Card>
+                  <CardItem header bordered button onPress={()=>this._onSummaryPress(coin.slug)}>
                     <Left>
-                      <Text>{coin.currencyName}</Text>
+                      <Text style={{ fontSize: 20 , fontWeight: "bold"}}>{coin.currencyName}</Text>
                     </Left>
                     <Right>
-                      <Text>version: {coin.consensusSecurity}</Text>
+                      <Text style={{ fontSize: 13 , fontWeight: "bold"}}>{coin.consensusSecurity}</Text>
                     </Right>
-                  </ListItem>
-                </View>
+                  </CardItem>
+                  <CardItem bordered>
+                  <Grid>
+                    <Col>
+                      <Text style={{ fontSize: 10 , fontWeight: "bold"}}>Price</Text>
+                      <Text>{coin.price}</Text>
+                    </Col>
+                    <Col>
+                    <Text style={{ fontSize: 10 , fontWeight: "bold"}}>CPC</Text>
+                    <Text>{coin.cpc}</Text>
+                    </Col>
+                    <Col>
+                    <Text style={{ fontSize: 10 , fontWeight: "bold"}}>CPT</Text>
+                    <Text>{coin.cpt}</Text>
+                    </Col>
+                    </Grid>
+                  </CardItem>
+                  <Grid>
+                    <Col>
+                    <CardItem bordered button onPress={()=>this._onFeaturePress(coin.slug)}>
+                    <Text>Feature</Text>
+                    </CardItem>
+                    </Col>
+                    <Col>
+                    <CardItem bordered button onPress={()=>this._onRedFlagPress(coin.slug, coin._id)} >
+                    <Text>RedFlag</Text>
+                    </CardItem>
+                    </Col>
+                  </Grid>
+                </Card>
               );
             }}
           />
-        </List>
+        </Content>
       </Container>
     );
   }

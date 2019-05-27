@@ -53,9 +53,9 @@ export default class HomeScreen extends Component {
           <Tab heading={ <TabHeading style={AppStyle.tabDark}><Icon name="chatbubbles" /></TabHeading>}>
             <Comment />
           </Tab>
-          <Tab heading={ <TabHeading style={AppStyle.tabDark}><Icon name='search' /></TabHeading>}>
-            <AllCoins />
-          </Tab>
+          {/* <Tab heading={ <TabHeading style={AppStyle.tabDark}><Icon name='search' /></TabHeading>}>
+            <AllCoins navigation={this.props.navigation}/>
+          </Tab> */}
           {/* <Tab heading={ <TabHeading style={AppStyle.tabDark}><Icon name='albums' /></TabHeading>}>
             <Wall />
           </Tab>  */}
