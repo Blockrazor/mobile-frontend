@@ -52,7 +52,18 @@ class Profile extends Component {
     };
   }
   onLogoutPress() {
-    Meteor.logout();
+    Meteor.logout(
+      err => {
+        if(err){
+          console.log(err);
+          this.props.setLoggedIn(true, Meteor.user());
+        }
+        else{
+          this.props.setLoggedIn(false, Meteor.user());
+        }
+      }
+    );
+    this.props.setLoggedIn(false, null);
   }
   render() {
     if (!this.props.userdataReady) {
