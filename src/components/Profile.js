@@ -144,6 +144,7 @@ class Profile extends Component {
 }
 
 export default withTracker(params => {
+  
   const handle = Meteor.subscribe("userdata");
 
   return {
