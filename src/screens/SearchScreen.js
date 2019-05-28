@@ -14,7 +14,7 @@ export default class WallScreen extends Component {
   render() {
     return (
         <Container>
-            <NormalHeader title="Search" navigation={this.props.navigation}/>
+
             <AllCoins navigation={this.props.navigation} />
         </Container>
 
