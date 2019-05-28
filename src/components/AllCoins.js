@@ -75,11 +75,6 @@ class AllCoins extends Component {
               <Icon name={"search"} />
               <Input />
             </Item>
-            {/* <Right style={{ flex: 0.3 }}>
-              <Button transparent>
-                <Text>Search</Text>
-              </Button>
-            </Right> */}
           </Header>
           <ActivityIndicator size="large" />
         </Container>
@@ -99,7 +94,6 @@ class AllCoins extends Component {
               onChangeText={keyword => {
                 this.SearchFilterFunction(keyword);
               }}
-              onSubmitEditing={() => this.search()}
               placeholder="Search"
               autoCorrect={false}
               autoFocus={true}
@@ -107,11 +101,6 @@ class AllCoins extends Component {
               value={this.state.keyword}
             />
           </Item>
-          {/* <Right style={{ flex: 0.3 }}>
-            <Button transparent onPress={() => this.search()}>
-              <Text>Search</Text>
-            </Button>
-          </Right> */}
         </Header>
         <MeteorComplexListView
           elements={() => {
