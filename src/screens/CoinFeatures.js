@@ -47,7 +47,7 @@ class CoinFeatures extends Component {
       <Container>
         <AndroidBack navigation={this.props.navigation} />
         <CoinHeader title="Features" navigation={this.props.navigation} />
-        <Title style={{ paddingTop: 10, paddingBottom: 10 }}>
+        <Title style={{ paddingTop: 10, paddingBottom: 10 , color:"black"}}>
           {this.props.navigation.getParam("currencySlug", "Coin")}
         </Title>
         <MeteorComplexListView
