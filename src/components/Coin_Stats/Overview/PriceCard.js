@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View } from "react-native";
+import { View, ActivityIndicator } from "react-native";
 import {
   ListItem,
   Icon,
@@ -19,11 +19,29 @@ import {
   List
 } from "native-base";
 import { Col, Row, Grid } from "react-native-easy-grid";
+import { connect } from "react-redux";
 
-export default class PriceCard extends Component {
+const mapStateToProps = state => {
+  return {
+    currency: state.currency
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setCurrency: currency => {
+      dispatch(setCurrency(currency));
+    },
+    getCurrencies: () => {
+      dispatch(getCurrencies());
+    }
+  };
+};
+
+class PriceCard extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { currency: {} };
   }
   render() {
     return (
@@ -39,26 +57,26 @@ export default class PriceCard extends Component {
               />
             </Col>
             <Col>
-              <Text style={{ fontSize: 20 , fontWeight: "bold" }}>Cardano</Text>
+              <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+                {this.props.currency.currencyName}
+              </Text>
             </Col>
             <Col>
-              <Text style={{ fontSize: 14 }}>ADA</Text>
+              <Text style={{ fontSize: 14 }}>
+                {this.props.currency.currencySymbol}
+              </Text>
             </Col>
           </Grid>
         </ListItem>
         <ListItem style={{ marginLeft: 0, paddingLeft: 15 }}>
           <Grid>
             <Col>
-              <Text>
-                0.00001020
-              </Text>
-              <Text style={{ fontSize: 10 , fontWeight: "bold"}}>BTC</Text>
+              <Text>{this.props.currency.cpt}</Text>
+              <Text style={{ fontSize: 10, fontWeight: "bold" }}>CPT</Text>
             </Col>
             <Col>
-              <Text>
-                $0.063844
-              </Text>
-              <Text style={{ fontSize: 10 , fontWeight: "bold"}}>USD</Text>
+              <Text>{this.props.currency.cpc}</Text>
+              <Text style={{ fontSize: 10, fontWeight: "bold" }}>CPC</Text>
             </Col>
           </Grid>
         </ListItem>
@@ -66,3 +84,11 @@ export default class PriceCard extends Component {
     );
   }
 }
+
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(
+  PriceCard
+);
