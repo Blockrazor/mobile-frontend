@@ -74,7 +74,7 @@ class HomeScreen extends Component {
               </TabHeading>
             }
           >
-            <Overview />
+            <Overview navigation={this.props.navigation}/>
           </Tab>
           <Tab
             heading={
@@ -92,7 +92,7 @@ class HomeScreen extends Component {
               </TabHeading>
             }
           >
-            <Price />
+            <Price navigation={this.props.navigation}/>
           </Tab>
           <Tab
             heading={
@@ -101,7 +101,7 @@ class HomeScreen extends Component {
               </TabHeading>
             }
           >
-            <Comment />
+            <Comment navigation={this.props.navigation}/>
           </Tab>
         </Tabs>
         {this._footer()}
