@@ -46,7 +46,7 @@ const setCurrency = currency => {
 
 export { setCurrency };
 
-const watchCurrencies = () => {
+const getCurrencies = () => {
   return function(dispatch) {
     Meteor.subscribe("approvedcurrencies", {
       onReady: function() {
@@ -60,4 +60,4 @@ const watchCurrencies = () => {
   };
 };
 
-export { watchCurrencies };
+export { getCurrencies };

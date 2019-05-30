@@ -17,18 +17,11 @@ import CoinFooter from "../components/Coin_Stats/CoinFooter";
 import CoinHeader from "../components/Coin_Stats/CoinHeader";
 import Price from "../components/Coin_Stats/CoinPrice";
 import AppStyle from "../components/AppStyle";
-import Meteor, {
-  withTracker,
-  MeteorComplexListView,
-  ReactiveVar
-} from "react-native-meteor";
 import { connect } from "react-redux";
-import { setCurrency , watchCurrencies } from "../redux/app-redux";
+import { setCurrency, getCurrencies } from "../redux/app-redux";
 
 const mapStateToProps = state => {
   return {
-    loggedIn: state.loggedIn,
-    user: state.user,
     currency: state.currency
   };
 };
@@ -38,8 +31,8 @@ const mapDispatchToProps = dispatch => {
     setCurrency: currency => {
       dispatch(setCurrency(currency));
     },
-    watchCurrencies: ()=>{
-      dispatch(watchCurrencies());
+    getCurrencies: () => {
+      dispatch(getCurrencies());
     }
   };
 };
@@ -49,7 +42,7 @@ class HomeScreen extends Component {
     super(props);
     this.state = { currentPage: 0, currency: {} };
     if (this.props.currency.currencyName == undefined) {
-      this.props.watchCurrencies();
+      this.props.getCurrencies();
     }
   }
 
@@ -67,31 +60,12 @@ class HomeScreen extends Component {
   }
 
   render() {
-    if (this.props.currency.currencyName == undefined) {
-      return (
-        <Container>
-          <CoinHeader navigation={this.props.navigation} />
-          <ActivityIndicator size="large" />
-        </Container>
-      );
-    }
     return (
       <Container>
         <CoinHeader navigation={this.props.navigation} />
         <Tabs
-          style={
-            Platform.OS === "android"
-              ? {
-                  overflow: "hidden"
-                  //marginTop: getStatusBarHeight()
-                }
-              : {
-                  //marginTop: getStatusBarHeight()
-                }
-          }
-          //renderTabBar={()=> <ScrollableTab />}
+          style={Platform.OS === "android" ? { overflow: "hidden" } : {}}
           onChangeTab={({ i }) => this.setState({ currentPage: i })}
-          //ref={(c) => { this.tabs = c; return; }} initialPage={1}
         >
           <Tab
             heading={
@@ -100,7 +74,6 @@ class HomeScreen extends Component {
               </TabHeading>
             }
           >
-          <Text>{this.props.currency.currencyName}</Text>
             <Overview />
           </Tab>
           <Tab
@@ -130,12 +103,6 @@ class HomeScreen extends Component {
           >
             <Comment />
           </Tab>
-          {/* <Tab heading={ <TabHeading style={AppStyle.tabDark}><Icon name='search' /></TabHeading>}>
-            <AllCoins navigation={this.props.navigation}/>
-          </Tab> */}
-          {/* <Tab heading={ <TabHeading style={AppStyle.tabDark}><Icon name='albums' /></TabHeading>}>
-            <Wall />
-          </Tab>  */}
         </Tabs>
         {this._footer()}
       </Container>
@@ -149,10 +116,10 @@ export default connect(
 )(
   // withTracker(params => {
   //   const handle = Meteor.subscribe("approvedcurrencies");
-    
+
   //   return {
   //     dataReady: handle.ready()
   //   };
   // })
-  (HomeScreen)
+  HomeScreen
 );
