@@ -57,8 +57,7 @@ class TopCommentCard extends Component {
               <Icon name="thumbs-up" style={{ color: "#ffffff" }} />
             </Button>
             <Text>{appealVote}</Text>
-            <Text> </Text>
-            <Button transparent>
+            <Button transparent style={{marginLeft: 40}}>
               <Icon name="thumbs-down" style={{ color: "#ffffff" }} />
             </Button>
             <Text>{downVote}</Text>
@@ -67,10 +66,10 @@ class TopCommentCard extends Component {
       );
     } else {
       return (
-        <View>
+        <Body>
           <Text note>No feature yet</Text>
           <Text numberOfLines={5}>No feature yet</Text>
-        </View>
+        </Body>
       );
     }
   }
@@ -107,14 +106,14 @@ class TopCommentCard extends Component {
               </Button>
               <Text>238</Text>
               <Text> </Text>
-              <Button transparent>
+              <Button transparent style={{marginLeft: 40}}>
                 <Icon name="thumbs-down" style={{ color: "#ffffff" }} />
               </Button>
               <Text>2</Text>
             </View>
           </Body>
         </CardItem>
-        <CardItem style={{ backgroundColor: "#d1e0d9" }}>
+        <CardItem style={{ backgroundColor: "#d1e0d9" }} button onPress={()=>{this.props.navigation.navigate("CoinFeatures", { currencySlug: this.props.currency.slug })}}>
           {this._getTopFeatures()}
         </CardItem>
       </Card>
