@@ -92,7 +92,7 @@ class AllCoins extends Component {
               <Icon name="arrow-back" />
             </Button>
           </Left>
-          <Item style={{ flex: 0.9 }}>
+          <Item style={{ flex: 0.8 }}>
             <Icon name={"search"} />
             <Input
               onChangeText={keyword => {
@@ -105,6 +105,11 @@ class AllCoins extends Component {
               value={this.state.keyword}
             />
           </Item>
+          <Right style={{flex: 0.15}}>
+          <Button transparent onPress={() => this.props.navigation.goBack()}>
+              <Icon name="heart"  style={{color:"red"}}/>
+            </Button>
+          </Right>
         </Header>
         <MeteorComplexListView
           elements={() => {
