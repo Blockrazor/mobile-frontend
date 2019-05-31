@@ -26,6 +26,9 @@ import {
 } from "native-base";
 import AppStyle from "./AppStyle";
 import { Col, Row, Grid } from "react-native-easy-grid";
+import { connect } from "react-redux";
+import { setCurrency, getCurrencies } from "../redux/app-redux";
+
 
 class AllCoins extends Component {
   constructor(props) {
@@ -36,8 +39,9 @@ class AllCoins extends Component {
     };
   }
 
-  _onSummaryPress = slug => {
-    this.props.navigation.navigate("CoinSummary", { currencySlug: slug });
+  _onSummaryPress = coin => {
+    this.props.setCurrency(coin);
+    this.props.navigation.navigate("Home");
   };
 
   _onFeaturePress = slug => {
@@ -106,7 +110,7 @@ class AllCoins extends Component {
           elements={() => {
             key = new RegExp(this.state.keyword);
             return Meteor.collection("currencies").find({
-              currencyName : key
+              currencyName: key
             });
           }}
           options={{ sort: { eloRanking: -1 } }}
@@ -118,7 +122,7 @@ class AllCoins extends Component {
                   header
                   bordered
                   button
-                  onPress={() => this._onSummaryPress(coin.slug)}
+                  onPress={() => this._onSummaryPress(coin)}
                 >
                   <Left>
                     <Text style={{ fontSize: 20, fontWeight: "bold" }}>
@@ -131,7 +135,11 @@ class AllCoins extends Component {
                     </Text>
                   </Right>
                 </CardItem>
-                <CardItem bordered>
+                <CardItem
+                  bordered
+                  button
+                  onPress={() => this._onSummaryPress(coin)}
+                >
                   <Grid>
                     <Col>
                       <Text style={{ fontSize: 10, fontWeight: "bold" }}>
@@ -153,26 +161,6 @@ class AllCoins extends Component {
                     </Col>
                   </Grid>
                 </CardItem>
-                <Grid>
-                  <Col>
-                    <CardItem
-                      bordered
-                      button
-                      onPress={() => this._onFeaturePress(coin.slug)}
-                    >
-                      <Text>Feature</Text>
-                    </CardItem>
-                  </Col>
-                  <Col>
-                    <CardItem
-                      bordered
-                      button
-                      onPress={() => this._onRedFlagPress(coin.slug, coin._id)}
-                    >
-                      <Text>RedFlag</Text>
-                    </CardItem>
-                  </Col>
-                </Grid>
               </Card>
             );
           }}
@@ -182,10 +170,31 @@ class AllCoins extends Component {
   }
 }
 
-export default withTracker(params => {
-  //const handle = Meteor.subscribe("auctions");
-  const handle = Meteor.subscribe("approvedcurrencies");
+const mapStateToProps = state => {
   return {
-    dataReady: handle.ready()
+    currency: state.currency
   };
-})(AllCoins);
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setCurrency: currency => {
+      dispatch(setCurrency(currency));
+    },
+    getCurrencies: () => {
+      dispatch(getCurrencies());
+    }
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(
+  withTracker(params => {
+    const handle = Meteor.subscribe("approvedcurrencies");
+    return {
+      dataReady: handle.ready()
+    };
+  })(AllCoins)
+);

@@ -59,6 +59,7 @@ class CoinFeatures extends Component {
               )
             });
           }}
+          enableEmptySections={true}
           options={{ sort: { createdAt: -1 } }}
           renderRow={feature => {
             return (
