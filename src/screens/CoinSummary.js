@@ -59,8 +59,8 @@ class CoinSummary extends Component {
               )
             });
           }}
-          enableEmptySections={true}
           options={{ sort: { createdAt: -1 } }}
+          enableEmptySections={true}
           renderRow={summary => {
             return (
               <Card>
