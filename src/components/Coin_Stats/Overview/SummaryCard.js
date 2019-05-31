@@ -67,7 +67,7 @@ class SummaryCard extends Component {
 
     return (
       <Card>
-        <CardItem bordered>{this._getTopSummary()}</CardItem>
+        <CardItem bordered button onPress={()=>{this.props.navigation.navigate("CoinSummary", { currencySlug: this.props.currency.slug })}}>{this._getTopSummary()}</CardItem>
       </Card>
     );
   }

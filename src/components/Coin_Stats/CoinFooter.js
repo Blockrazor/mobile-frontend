@@ -57,7 +57,7 @@ class CointFooter extends Component {
           <Button full onPress={()=>{this._ChangeCoins()}}>
             <Icon name="close-circle" style={{ color: "#d9534f" }} />
           </Button>
-          <Button full>
+          <Button full onPress={()=>{this._ChangeCoins()}}>
             <Icon name="checkmark-circle" style={{ color: "#5cb85c" }} />
           </Button>
         </FooterTab>

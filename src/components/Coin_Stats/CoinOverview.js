@@ -20,10 +20,10 @@ class CoinsOverView extends Component {
     }
     return (
       <Content>
-        <PriceCard />
-        <SummaryCard />
-        <TopCommentCard />
-        <NewsCard />
+        <PriceCard navigation={this.props.navigation}/>
+        <SummaryCard navigation={this.props.navigation}/>
+        <TopCommentCard navigation={this.props.navigation}/>
+        <NewsCard navigation={this.props.navigation}/>
       </Content>
     );
   }
