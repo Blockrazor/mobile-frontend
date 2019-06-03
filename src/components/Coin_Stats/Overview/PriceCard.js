@@ -75,8 +75,8 @@ class PriceCard extends Component {
               <Text style={{ fontSize: 10, fontWeight: "bold" }}>CPT</Text>
             </Col>
             <Col>
-              <Text>{this.props.currency.cpc}</Text>
-              <Text style={{ fontSize: 10, fontWeight: "bold" }}>CPC</Text>
+              <Text>{this.props.currency.price}</Text>
+              <Text style={{ fontSize: 10, fontWeight: "bold" }}>USD</Text>
             </Col>
           </Grid>
         </ListItem>
