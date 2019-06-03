@@ -44,7 +44,7 @@ class TopCommentCard extends Component {
       }
       return (
         <Body>
-          <Text note>{feature.author}</Text>
+          {/* <Text note>{feature.author}</Text> */}
           <Text>{feature.featureName}</Text>
           <View
             style={{
@@ -75,25 +75,25 @@ class TopCommentCard extends Component {
   }
 
   _getTopRedFlag() {
-    var feature = Meteor.collection("redflags").findOne(
+    var redflag = Meteor.collection("redflags").findOne(
       {
         currencyId: this.props.currency._id
       },
       { sort: { rating: -1 } }
     );
-    if (feature != undefined) {
+    if (redflag != undefined) {
       var appealVote = 0;
       var downVote = 0;
-      if (feature.downVoted != undefined) {
-        downVote = feature.downVoted.length;
+      if (redflag.downVoted != undefined) {
+        downVote = redflag.downVoted.length;
       }
-      if (feature.appealVoted != undefined) {
-        appealVote = feature.appealVoted.length;
+      if (redflag.appealVoted != undefined) {
+        appealVote = redflag.appealVoted.length;
       }
       return (
         <Body>
-          <Text note>{feature.author}</Text>
-          <Text>{feature.name}</Text>
+          {/* <Text note>{redflag.author}</Text> */}
+          <Text>{redflag.name}</Text>
           <View
             style={{
               flexDirection: "row",
@@ -138,7 +138,7 @@ class TopCommentCard extends Component {
 
     return (
       <Card>
-        <CardItem style={{ backgroundColor: "#e0d1d1" }}>
+        <CardItem style={{ backgroundColor: "#e0d1d1" }} button onPress={()=>{this.props.navigation.navigate("CoinRedFlag", { currencySlug: this.props.currency.slug, currencyId: this.props.currency._id })}}> 
           {this._getTopRedFlag()}
         </CardItem>
         <CardItem style={{ backgroundColor: "#d1e0d9" }} button onPress={()=>{this.props.navigation.navigate("CoinFeatures", { currencySlug: this.props.currency.slug })}}>
