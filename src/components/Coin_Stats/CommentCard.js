@@ -12,7 +12,9 @@ export default class NewsCard extends Component {
     render() {
         return (
                 <Card>
-                    <CardItem style={{ backgroundColor: this.props.color }} button onPress={() => alert("Check details")} onLongPress={() => alert("Remove")}>
+                    <CardItem style={{ backgroundColor: this.props.color }}
+                    //  button onPress={() => alert("Check details")} onLongPress={() => alert("Remove")}
+                     >
                         <Body>
                             <Text>
                                 {this.props.comment}
