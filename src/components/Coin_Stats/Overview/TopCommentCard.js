@@ -138,7 +138,7 @@ class TopCommentCard extends Component {
 
     return (
       <Card>
-        <CardItem style={{ backgroundColor: "#e0d1d1" }}>
+        <CardItem style={{ backgroundColor: "#e0d1d1" }} button onPress={()=>{this.props.navigation.navigate("CoinRedFlag", { currencySlug: this.props.currency.slug, currencyId: this.props.currency._id })}}> 
           {this._getTopRedFlag()}
         </CardItem>
         <CardItem style={{ backgroundColor: "#d1e0d9" }} button onPress={()=>{this.props.navigation.navigate("CoinFeatures", { currencySlug: this.props.currency.slug })}}>
