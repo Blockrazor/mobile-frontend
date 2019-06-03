@@ -28,14 +28,14 @@ export default class NewsCard extends Component {
                                     <Icon name='thumbs-up' style={{ color: '#ffffff' }} />
                                 </Button>
                                 <Text>
-                                    {Math.floor(Math.random() * 100) + 1}
+                                    {this.props.appealVote}
                             </Text>
                                 <Text>      </Text>
                                 <Button transparent>
                                     <Icon name='thumbs-down' style={{ color: '#ffffff' }} />
                                 </Button>
                                 <Text>
-                                    {Math.floor(Math.random() * 100) + 1}
+                                    {this.props.downVote}
                             </Text>
                             </View>
                         </Body>
