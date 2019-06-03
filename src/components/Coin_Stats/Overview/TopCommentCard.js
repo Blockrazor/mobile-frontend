@@ -74,8 +74,57 @@ class TopCommentCard extends Component {
     }
   }
 
+  _getTopRedFlag() {
+    var feature = Meteor.collection("redflags").findOne(
+      {
+        currencyId: this.props.currency._id
+      },
+      { sort: { rating: -1 } }
+    );
+    if (feature != undefined) {
+      var appealVote = 0;
+      var downVote = 0;
+      if (feature.downVoted != undefined) {
+        downVote = feature.downVoted.length;
+      }
+      if (feature.appealVoted != undefined) {
+        appealVote = feature.appealVoted.length;
+      }
+      return (
+        <Body>
+          <Text note>{feature.author}</Text>
+          <Text>{feature.name}</Text>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <Button transparent>
+              <Icon name="thumbs-up" style={{ color: "#ffffff" }} />
+            </Button>
+            <Text>{appealVote}</Text>
+            <Button transparent style={{marginLeft: 40}}>
+              <Icon name="thumbs-down" style={{ color: "#ffffff" }} />
+            </Button>
+            <Text>{downVote}</Text>
+          </View>
+        </Body>
+      );
+    } else {
+      return (
+        <Body>
+          <Text note>No RedFlag yet</Text>
+          <Text numberOfLines={5}>No RedFlag yet</Text>
+        </Body>
+      );
+    }
+  }
+
+
   render() {
-    if (!this.props.dataReady) {
+    if (!(this.props.redFlagReady && this.props.featureReady)) {
       return (
         <Card>
           <CardItem bordered>
@@ -90,28 +139,7 @@ class TopCommentCard extends Component {
     return (
       <Card>
         <CardItem style={{ backgroundColor: "#e0d1d1" }}>
-          <Body>
-            <Text>
-              This might change with the launch of Bitcoin trading by Fidelity.
-            </Text>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center"
-              }}
-            >
-              <Button transparent>
-                <Icon name="thumbs-up" style={{ color: "#ffffff" }} />
-              </Button>
-              <Text>238</Text>
-              <Text> </Text>
-              <Button transparent style={{marginLeft: 40}}>
-                <Icon name="thumbs-down" style={{ color: "#ffffff" }} />
-              </Button>
-              <Text>2</Text>
-            </View>
-          </Body>
+          {this._getTopRedFlag()}
         </CardItem>
         <CardItem style={{ backgroundColor: "#d1e0d9" }} button onPress={()=>{this.props.navigation.navigate("CoinFeatures", { currencySlug: this.props.currency.slug })}}>
           {this._getTopFeatures()}
@@ -136,9 +164,11 @@ export default connect(
   mapDispatchToProps
 )(
   withTracker(params => {
-    const handle = Meteor.subscribe("features");
+    const FeatureHandle = Meteor.subscribe("features");
+    const RedFlagHandle = Meteor.subscribe("redflags");
     return {
-      dataReady: handle.ready()
+      featureReady: FeatureHandle.ready(),
+      redFlagReady: RedFlagHandle.ready()
     };
   })(TopCommentCard)
 );
