@@ -42,8 +42,14 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 class LoginScreen extends Component {
+
+
+  
   constructor(props) {
     super(props);
+    if (Meteor.user()) {
+      this.props.setLoggedIn(true, Meteor.user());
+    }
     this.state = {
       email: "",
       password: "",
@@ -117,7 +123,7 @@ class LoginScreen extends Component {
   }
 
   render() {
-    if (this.props.loggedIn) {
+    if (Meteor.user()) {
       return (
         <Profile navigation={this.props.navigation}/>
       );
