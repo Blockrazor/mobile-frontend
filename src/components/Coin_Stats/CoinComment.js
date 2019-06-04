@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, ScrollView, ActivityIndicator, FlatList } from "react-native";
-import { Text, Button, Icon, Item, Input, Picker } from "native-base";
+import { Text, Button, Icon, Item, Input, Picker ,Title} from "native-base";
 import CommentCard from "./CommentCard";
 import { connect } from "react-redux";
 import Meteor, { withTracker } from "react-native-meteor";
@@ -99,6 +99,7 @@ class CoinsComments extends Component {
     }
     return (
       <View style={{ flex: 1 }}>
+      <Title style={{color:"#000000", marginBottom: 5, marginTop:5}}>{this.props.currency.currencyName}</Title>
         <ScrollView>{this._renderComments()}</ScrollView>
         <View>
           <Item picker>
