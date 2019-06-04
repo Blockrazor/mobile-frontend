@@ -22,7 +22,7 @@ class CoinsOverView extends Component {
       <Content>
         <PriceCard navigation={this.props.navigation}/>
         <SummaryCard navigation={this.props.navigation}/>
-        <TopCommentCard navigation={this.props.navigation}/>
+        <TopCommentCard navigation={this.props.navigation} tabs={this.props.tabs}/>
         <NewsCard navigation={this.props.navigation}/>
       </Content>
     );

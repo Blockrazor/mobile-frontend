@@ -99,7 +99,7 @@ class CoinsComments extends Component {
     }
     return (
       <View style={{ flex: 1 }}>
-      <Title style={{color:"#000000", marginBottom: 5, marginTop:5}}>{this.props.currency.currencyName}</Title>
+      <Title style={{color:"#000000", marginBottom: 6, marginTop:6}}>{this.props.currency.currencyName}</Title>
         <ScrollView>{this._renderComments()}</ScrollView>
         <View>
           <Item picker>

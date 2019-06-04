@@ -57,7 +57,7 @@ class TopCommentCard extends Component {
               <Icon name="thumbs-up" style={{ color: "#ffffff" }} />
             </Button>
             <Text>{appealVote}</Text>
-            <Button transparent style={{marginLeft: 40}}>
+            <Button transparent style={{ marginLeft: 40 }}>
               <Icon name="thumbs-down" style={{ color: "#ffffff" }} />
             </Button>
             <Text>{downVote}</Text>
@@ -105,7 +105,7 @@ class TopCommentCard extends Component {
               <Icon name="thumbs-up" style={{ color: "#ffffff" }} />
             </Button>
             <Text>{appealVote}</Text>
-            <Button transparent style={{marginLeft: 40}}>
+            <Button transparent style={{ marginLeft: 40 }}>
               <Icon name="thumbs-down" style={{ color: "#ffffff" }} />
             </Button>
             <Text>{downVote}</Text>
@@ -122,7 +122,6 @@ class TopCommentCard extends Component {
     }
   }
 
-
   render() {
     if (!(this.props.redFlagReady && this.props.featureReady)) {
       return (
@@ -138,10 +137,29 @@ class TopCommentCard extends Component {
 
     return (
       <Card>
-        <CardItem style={{ backgroundColor: "#e0d1d1" }} button onPress={()=>{this.props.navigation.navigate("CoinRedFlag", { currencySlug: this.props.currency.slug, currencyId: this.props.currency._id })}}> 
+        <CardItem
+          style={{ backgroundColor: "#e0d1d1" }}
+          button
+          onPress={() => {
+            this.props.tabs.goToPage.call(this.props.tabs, 3);
+            // this.props.navigation.navigate("CoinRedFlag", {
+            //   currencySlug: this.props.currency.slug,
+            //   currencyId: this.props.currency._id
+            // });
+          }}
+        >
           {this._getTopRedFlag()}
         </CardItem>
-        <CardItem style={{ backgroundColor: "#d1e0d9" }} button onPress={()=>{this.props.navigation.navigate("CoinFeatures", { currencySlug: this.props.currency.slug })}}>
+        <CardItem
+          style={{ backgroundColor: "#d1e0d9" }}
+          button
+          onPress={() => {
+            this.props.tabs.goToPage.call(this.props.tabs, 3);
+            // this.props.navigation.navigate("CoinFeatures", {
+            //   currencySlug: this.props.currency.slug
+            // });
+          }}
+        >
           {this._getTopFeatures()}
         </CardItem>
       </Card>
