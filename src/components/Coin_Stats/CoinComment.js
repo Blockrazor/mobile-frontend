@@ -34,7 +34,7 @@ class CoinsComments extends Component {
       {
         currencyId: this.props.currency._id
       },
-      { sort: { rating: -1 }, limit: 2 }
+      { sort: { rating: -1 }, limit: 5 }
     );
     redflags.map(item => {
       item.type = "redflag";
@@ -44,7 +44,7 @@ class CoinsComments extends Component {
       {
         currencySlug: this.props.currency.slug
       },
-      { sort: { rating: -1 }, limit: 2 }
+      { sort: { rating: -1 }, limit: 5 }
     );
     feature.map(item => {
       item.type = "feature";
@@ -61,33 +61,19 @@ class CoinsComments extends Component {
   };
 
   _renderRow = comment => {
-    if (comment.item.type == "redflag") {
-        var appealVote = 0;
-        var downVote = 0;
-        if (comment.item.downVoted != undefined) {
-          downVote = comment.item.downVoted.length;
-        }
-        if (comment.item.appealVoted != undefined) {
-          appealVote = comment.item.appealVoted.length;
-        }
-      return <CommentCard comment={comment.item.name} color="#e0d1d1" appealVote={appealVote} downVote={downVote}/>;
-    } else if (comment.item.type == "feature") {
-      var appealVote = 0;
-        var downVote = 0;
-        if (comment.item.downVoted != undefined) {
-          downVote = comment.item.downVoted.length;
-        }
-        if (comment.item.appealVoted != undefined) {
-          appealVote = comment.item.appealVoted.length;
-        }
-      return <CommentCard comment={comment.item.featureName} color="#d1e0d9" appealVote={appealVote} downVote={downVote}/>;
-    }
+      return <CommentCard comment={comment.item}/>;
   };
 
   _addComment = () => {
     if (this.state.stance == "positive") {
-      console.log(this.state.comment);
-      console.log(this.state.stance);
+      // Meteor.call('newComment', this.props.currency._id, this.state.comment, 1, true, function(error, result) {
+      //   if(!error) {
+      //     console.log('success');
+      //   } else {
+      //     console.log(error);
+      //     return;
+      //   }
+      // });
       // Meteor.collection("features").insert({
       //   currencyId: this.props.currency._id,
       //   currencySlug: this.props.currency.slug,

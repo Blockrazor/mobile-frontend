@@ -4,8 +4,6 @@ import Meteor, { withTracker } from "react-native-meteor";
 //Initial State
 
 const InitialState = {
-  loggedIn: false,
-  user: null,
   currency: {}
 };
 
@@ -13,8 +11,6 @@ const InitialState = {
 
 const reducer = (state = InitialState, action) => {
   switch (action.type) {
-    case "setLoggedIn":
-      return { ...state, loggedIn: action.loggedIn, user: action.user };
     case "setCurrency":
       return { ...state, currency: action.currency };
     default:
@@ -27,15 +23,7 @@ const store = createStore(reducer, applyMiddleware(thunkMiddleware));
 export { store };
 
 //action creator
-const setLoggedIn = (logging, user) => {
-  return {
-    type: "setLoggedIn",
-    loggedIn: logging,
-    user: user
-  };
-};
 
-export { setLoggedIn };
 
 const setCurrency = currency => {
   return {
