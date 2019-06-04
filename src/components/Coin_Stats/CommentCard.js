@@ -46,7 +46,7 @@ class CommentCard extends Component {
         result
       ) {
         if (!error) {
-          console.log("success!");
+        //   console.log("success!");
         } else {
           console.log(error.reason);
         }
@@ -57,7 +57,7 @@ class CommentCard extends Component {
         result
       ) {
         if (!error) {
-          console.log("success!");
+        //   console.log("success!");
         } else {
           console.log(error.reason);
         }
@@ -102,12 +102,12 @@ class CommentCard extends Component {
                 <Icon name="thumbs-up" style={{ color: "#ffffff" }} />
               </Button>
               <Text>{appealVote}</Text>
-              <Text> </Text>
               <Button
                 transparent
                 onPress={() => {
                   this._vote("down");
                 }}
+                style={{marginLeft: 40}}
               >
                 <Icon name="thumbs-down" style={{ color: "#ffffff" }} />
               </Button>
