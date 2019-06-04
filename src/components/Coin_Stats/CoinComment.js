@@ -20,11 +20,11 @@ class CoinsComments extends Component {
   }
 
   compare(a, b) {
-    if (a.createdAt < b.createdAt) {
-      return -1;
-    }
-    if (a.createdAt > b.createdAt) {
+    if (a.rating < b.rating) {
       return 1;
+    }
+    if (a.rating > b.rating) {
+      return -1;
     }
     return 0;
   }
