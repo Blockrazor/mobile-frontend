@@ -20,26 +20,11 @@ import {
 import AndroidBack from "../../components/AndroidBack";
 import LoginHeader from "../../components/Header";
 import Meteor, { Accounts } from "react-native-meteor";
-import { connect } from 'react-redux';
-import { setLoggedIn } from '../../redux/app-redux';
 import Profile from '../../components/Profile';
 
 //test1@test.com
 //testtest
 
-
-const mapStateToProps = (state) => {
-  return {
-    loggedIn: state.loggedIn,
-    user: state.user,
-  };
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setLoggedIn: (logging, user) => { dispatch(setLoggedIn(logging, user)) }
-  };
-}
 
 class LoginScreen extends Component {
 
@@ -47,9 +32,6 @@ class LoginScreen extends Component {
   
   constructor(props) {
     super(props);
-    if (Meteor.user()) {
-      this.props.setLoggedIn(true, Meteor.user());
-    }
     this.state = {
       email: "",
       password: "",
@@ -86,15 +68,10 @@ class LoginScreen extends Component {
           this.setState({ error: error.reason });
         } else {
           //alert("login success! id: " + Meteor.user()._id);
-          this.props.setLoggedIn(true, Meteor.user());
+          this.props.navigation.navigate("Home");
         }
       });
     }
-  }
-
-  onLogoutPress() {
-    Meteor.logout();
-    this.props.setLoggedIn(false, Meteor.user());
   }
 
   renderButtonOrLoading() {
@@ -166,4 +143,4 @@ class LoginScreen extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
+export default (LoginScreen);

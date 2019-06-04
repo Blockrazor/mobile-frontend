@@ -25,23 +25,6 @@ import {
 import AndroidBack from "./AndroidBack";
 import LoginHeader from "./Header";
 import Meteor, { withTracker, MeteorListView } from "react-native-meteor";
-import { connect } from "react-redux";
-import { setLoggedIn } from "../redux/app-redux";
-
-const mapStateToProps = state => {
-  return {
-    loggedIn: state.loggedIn,
-    user: state.user
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    setLoggedIn: (logging, user) => {
-      dispatch(setLoggedIn(logging, user));
-    }
-  };
-};
 
 class Profile extends Component {
   constructor(props) {
@@ -52,20 +35,32 @@ class Profile extends Component {
     };
   }
   onLogoutPress() {
-    Meteor.logout(
-      err => {
-        if(err){
-          console.log(err);
-          this.props.setLoggedIn(true, Meteor.user());
-        }
-        else{
-          this.props.setLoggedIn(false, Meteor.user());
-        }
+    Meteor.logout(err => {
+      if (err) {
+      } else {
+        this.props.navigation.navigate("Home");
       }
-    );
-    this.props.setLoggedIn(false, null);
+    });
   }
   render() {
+    if (!Meteor.user()) {
+      return (
+        <Container>
+          <AndroidBack navigation={this.props.navigation} />
+          <LoginHeader
+            title="Profile"
+            navigation={this.props.navigation}
+            dest="Main"
+          />
+          <Content>
+            <Text />
+            <Text />
+            <Text />
+            <ActivityIndicator size="large" />
+          </Content>
+        </Container>
+      );
+    }
     if (!this.props.userdataReady) {
       return (
         <Container>
@@ -93,10 +88,10 @@ class Profile extends Component {
           dest="Main"
         />
         <Content>
-          <List >
+          <List>
             <ListItem style={{ marginLeft: 0, paddingLeft: 15 }}>
               <Left>
-                <Text>{this.props.user.username}</Text>
+                <Text>{Meteor.user().username}</Text>
               </Left>
               <Right>
                 <Button transparent onPress={this.onLogoutPress.bind(this)}>
@@ -115,7 +110,7 @@ class Profile extends Component {
               <Text>Email</Text>
             </ListItem>
             <ListItem>
-              <Text>{this.props.user.emails[0].address}</Text>
+              <Text>{Meteor.user().emails[0].address}</Text>
             </ListItem>
             <ListItem itemDivider>
               <Text>Krazor Balance</Text>
@@ -155,16 +150,10 @@ class Profile extends Component {
 }
 
 export default withTracker(params => {
-  
   const handle = Meteor.subscribe("userdata");
 
   return {
     userdataReady: handle.ready(),
     userdata: Meteor.collection("userdata").findOne({ _id: Meteor.user()._id })
   };
-})(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Profile)
-);
+})(Profile);
