@@ -61,7 +61,7 @@ class CoinsComments extends Component {
   };
 
   _renderRow = comment => {
-      return <CommentCard comment={comment.item}/>;
+    return <CommentCard comment={comment.item} />;
   };
 
   _addComment = () => {
@@ -101,32 +101,35 @@ class CoinsComments extends Component {
       <View style={{ flex: 1 }}>
         <ScrollView>{this._renderComments()}</ScrollView>
         <View>
+          <Item picker>
+            <Picker
+              mode="dropdown"
+              style={{ width: undefined }}
+              placeholder="Please choose your stance"
+              placeholderStyle={{ color: "#bfc6ea" }}
+              placeholderIconColor="#007aff"
+              selectedValue={this.state.stance}
+              onValueChange={this.onValueChange2.bind(this)}
+            >
+              <Picker.Item label="Positive" value="positive" />
+              <Picker.Item label="Negative" value="negative" />
+            </Picker>
+          </Item>
           <Item>
             <Input
+              style={{ flex: 0.85 }}
               placeholder="Your comment here..."
               onChangeText={comment => this.setState({ comment: comment })}
             />
-          </Item>
-          <Item picker>
-            <View style={{ flex: 5 }}>
-              <Picker
-                mode="dropdown"
-                style={{ width: undefined }}
-                placeholder="Please choose your stance"
-                placeholderStyle={{ color: "#bfc6ea" }}
-                placeholderIconColor="#007aff"
-                selectedValue={this.state.stance}
-                onValueChange={this.onValueChange2.bind(this)}
-              >
-                <Picker.Item label="Positive" value="positive" />
-                <Picker.Item label="Negative" value="negative" />
-              </Picker>
-            </View>
-            <View style={{ flex: 1 }}>
-              <Button transparent onPress={()=>{this._addComment()}}>
-                <Icon name="send" />
-              </Button>
-            </View>
+            <Button
+              transparent
+              onPress={() => {
+                this._addComment();
+              }}
+              style={{ flex: 0.15 }}
+            >
+              <Icon name="send" />
+            </Button>
           </Item>
         </View>
       </View>
