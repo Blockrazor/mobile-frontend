@@ -66,6 +66,7 @@ class HomeScreen extends Component {
         <Tabs
           style={Platform.OS === "android" ? { overflow: "hidden" } : {}}
           onChangeTab={({ i }) => this.setState({ currentPage: i })}
+          ref={(c) => { this.tabs = c; return; }}
         >
           <Tab
             heading={
@@ -74,7 +75,7 @@ class HomeScreen extends Component {
               </TabHeading>
             }
           >
-            <Overview navigation={this.props.navigation}/>
+            <Overview navigation={this.props.navigation} tabs={this.tabs}/>
           </Tab>
           <Tab
             heading={
