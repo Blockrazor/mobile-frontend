@@ -9,12 +9,13 @@ class CoinsComments extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected2: undefined,
+      stance: undefined,
+      comment: ""
     };
   }
   onValueChange2(value) {
     this.setState({
-      selected2: value
+      stance: value
     });
   }
 
@@ -59,14 +60,52 @@ class CoinsComments extends Component {
     );
   };
 
-  _renderRow = (comment) => {
-      if(comment.item.type == "redflag"){
-        return <CommentCard comment={comment.item.name} color="#e0d1d1" />
-      }
-      else if(comment.item.type == "feature"){
-        return <CommentCard comment={comment.item.featureName} color="#d1e0d9" />
-      }
-  }
+  _renderRow = comment => {
+    if (comment.item.type == "redflag") {
+        var appealVote = 0;
+        var downVote = 0;
+        if (comment.item.downVoted != undefined) {
+          downVote = comment.item.downVoted.length;
+        }
+        if (comment.item.appealVoted != undefined) {
+          appealVote = comment.item.appealVoted.length;
+        }
+      return <CommentCard comment={comment.item.name} color="#e0d1d1" appealVote={appealVote} downVote={downVote}/>;
+    } else if (comment.item.type == "feature") {
+      var appealVote = 0;
+        var downVote = 0;
+        if (comment.item.downVoted != undefined) {
+          downVote = comment.item.downVoted.length;
+        }
+        if (comment.item.appealVoted != undefined) {
+          appealVote = comment.item.appealVoted.length;
+        }
+      return <CommentCard comment={comment.item.featureName} color="#d1e0d9" appealVote={appealVote} downVote={downVote}/>;
+    }
+  };
+
+  _addComment = () => {
+    if (this.state.stance == "positive") {
+      console.log(this.state.comment);
+      console.log(this.state.stance);
+      // Meteor.collection("features").insert({
+      //   currencyId: this.props.currency._id,
+      //   currencySlug: this.props.currency.slug,
+      //   featureName: this.state.comment,
+      //   appeal: 2,
+      //   appealNumber: 2,
+      //   appealVoted: [Meteor.userId()],
+      //   flags: 0,
+      //   flagRatio: 0,
+      //   flaggedBy: [],
+      //   commenters: [],
+      //   createdAt: Date.now(),
+      //   author: Meteor.user().username,
+      //   createdBy: Meteor.userId(),
+      //   rating: 1
+      // });
+    }
+  };
 
   render() {
     if (!(this.props.redFlagReady && this.props.featureReady)) {
@@ -74,12 +113,13 @@ class CoinsComments extends Component {
     }
     return (
       <View style={{ flex: 1 }}>
-        <ScrollView>
-          {this._renderComments()}
-        </ScrollView>
+        <ScrollView>{this._renderComments()}</ScrollView>
         <View>
           <Item>
-            <Input placeholder="Your comment here..." />
+            <Input
+              placeholder="Your comment here..."
+              onChangeText={comment => this.setState({ comment: comment })}
+            />
           </Item>
           <Item picker>
             <View style={{ flex: 5 }}>
@@ -89,7 +129,7 @@ class CoinsComments extends Component {
                 placeholder="Please choose your stance"
                 placeholderStyle={{ color: "#bfc6ea" }}
                 placeholderIconColor="#007aff"
-                selectedValue={this.state.selected2}
+                selectedValue={this.state.stance}
                 onValueChange={this.onValueChange2.bind(this)}
               >
                 <Picker.Item label="Positive" value="positive" />
@@ -97,7 +137,7 @@ class CoinsComments extends Component {
               </Picker>
             </View>
             <View style={{ flex: 1 }}>
-              <Button transparent>
+              <Button transparent onPress={()=>{this._addComment()}}>
                 <Icon name="send" />
               </Button>
             </View>
