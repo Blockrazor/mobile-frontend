@@ -38,14 +38,14 @@ class SummaryCard extends Component {
     if (summary != undefined) {
       return (
         <Body>
-          <Text note>{summary.author}</Text>
+          <Text note>Top Summary</Text>
           <Text numberOfLines={5}>{summary.summary}</Text>
         </Body>
       );
     } else {
       return (
         <Body>
-          <Text note>No summary yet</Text>
+          <Text note>Top Summary</Text>
           <Text numberOfLines={5}>No summary yet</Text>
         </Body>
       );

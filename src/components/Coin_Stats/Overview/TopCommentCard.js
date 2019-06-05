@@ -44,7 +44,7 @@ class TopCommentCard extends Component {
       }
       return (
         <Body>
-          {/* <Text note>{feature.author}</Text> */}
+          <Text note>Top Feature</Text>
           <Text>{feature.featureName}</Text>
           <View
             style={{
@@ -67,7 +67,7 @@ class TopCommentCard extends Component {
     } else {
       return (
         <Body>
-          <Text note>No feature yet</Text>
+          <Text note>Top Feature</Text>
           <Text numberOfLines={5}>No feature yet</Text>
         </Body>
       );
@@ -92,7 +92,7 @@ class TopCommentCard extends Component {
       }
       return (
         <Body>
-          {/* <Text note>{redflag.author}</Text> */}
+          <Text note>Top RedFlag</Text>
           <Text>{redflag.name}</Text>
           <View
             style={{
@@ -115,7 +115,7 @@ class TopCommentCard extends Component {
     } else {
       return (
         <Body>
-          <Text note>No RedFlag yet</Text>
+          <Text note>Top RedFlag</Text>
           <Text numberOfLines={5}>No RedFlag yet</Text>
         </Body>
       );
