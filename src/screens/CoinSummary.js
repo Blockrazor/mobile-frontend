@@ -33,6 +33,50 @@ class CoinSummary extends Component {
   }
   componentWillMount() {}
 
+  _vote = (summary, position)=>{
+    Meteor.call('vote', 'Summaries', summary._id , position, (error, data) => {
+			if(!error) {
+      } else 
+      {
+      };
+		});
+
+  }
+
+  _renderRow = (summary) => {
+      var downVote = 0;
+      if (summary.downVoted != undefined) {
+        downVote = summary.downVoted.length;
+      }
+      if (summary.appealVoted != undefined) {
+        appealVote = summary.appealVoted.length;
+      }
+      return (
+        <Card>
+          <CardItem bordered>
+            <Grid>
+              <Row>
+                <Text note>{summary.author}</Text>
+                </Row>
+                <Row>
+                <Text>{summary.summary}</Text>
+                </Row>
+                <Row style={{alignItems:'center', justifyContent:'flex-start'}}>
+                <Button transparent onPress={()=>{this._vote(summary, "up")}}>
+                  <Icon name="thumbs-up" style={{ color: "#000000" }} />
+                </Button>
+                <Text>{appealVote}</Text>
+                <Button transparent style={{ marginLeft: 40 }} onPress={()=>{this._vote(summary, "down")}}>
+                  <Icon name="thumbs-down" style={{ color: "#000000" }} />
+                </Button>
+                <Text>{downVote}</Text>
+              </Row>
+            </Grid>
+          </CardItem>
+        </Card>
+      );
+  }
+
   render() {
     if (!this.props.dataReady) {
       return (
@@ -47,9 +91,9 @@ class CoinSummary extends Component {
       <Container>
         <AndroidBack navigation={this.props.navigation} />
         <CoinHeader title="Summary" navigation={this.props.navigation} />
-            <Title style={{paddingTop: 10, paddingBottom: 10, color:"black"}}>
-              {this.props.navigation.getParam("currencySlug", "Coin")}
-            </Title>
+        <Title style={{ paddingTop: 10, paddingBottom: 10, color: "black" }}>
+          {this.props.navigation.getParam("currencySlug", "Coin")}
+        </Title>
         <MeteorComplexListView
           elements={() => {
             return Meteor.collection("summaries").find({
@@ -61,20 +105,7 @@ class CoinSummary extends Component {
           }}
           options={{ sort: { createdAt: -1 } }}
           enableEmptySections={true}
-          renderRow={summary => {
-            return (
-              <Card>
-                <CardItem bordered>
-                  <Grid>
-                    <Col>
-                      <Text note>{summary.author}</Text>
-                      <Text>{summary.summary}</Text>
-                    </Col>
-                  </Grid>
-                </CardItem>
-              </Card>
-            );
-          }}
+          renderRow={this._renderRow}
         />
       </Container>
     );
