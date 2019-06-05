@@ -103,7 +103,7 @@ class CoinSummary extends Component {
               )
             });
           }}
-          options={{ sort: { createdAt: -1 } }}
+          options={{ sort: { rating: -1 } }}
           enableEmptySections={true}
           renderRow={this._renderRow}
         />
