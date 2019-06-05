@@ -1,21 +1,10 @@
 import React, { Component } from "react";
 import { View, ActivityIndicator } from "react-native";
 import {
-  ListItem,
-  Icon,
-  Header,
-  Left,
   Body,
   Text,
-  Right,
-  Thumbnail,
   Card,
   CardItem,
-  Segment,
-  Button,
-  Content,
-  Container,
-  Footer
 } from "native-base";
 import { connect } from "react-redux";
 import Meteor, { withTracker } from "react-native-meteor";
@@ -28,6 +17,7 @@ class SummaryCard extends Component {
       summary: {}
     };
   }
+  
   _getTopSummary() {
     var summary = Meteor.collection("summaries").findOne(
       {
@@ -67,7 +57,17 @@ class SummaryCard extends Component {
 
     return (
       <Card>
-        <CardItem bordered button onPress={()=>{this.props.navigation.navigate("CoinSummary", { currencySlug: this.props.currency.slug })}}>{this._getTopSummary()}</CardItem>
+        <CardItem
+          bordered
+          button
+          onPress={() => {
+            this.props.navigation.navigate("CoinSummary", {
+              currencySlug: this.props.currency.slug
+            });
+          }}
+        >
+          {this._getTopSummary()}
+        </CardItem>
       </Card>
     );
   }

@@ -13,7 +13,7 @@ class CoinsComments extends Component {
       comment: ""
     };
   }
-  onValueChange2(value) {
+  onValueChange(value) {
     this.setState({
       stance: value
     });
@@ -74,22 +74,6 @@ class CoinsComments extends Component {
       //     return;
       //   }
       // });
-      // Meteor.collection("features").insert({
-      //   currencyId: this.props.currency._id,
-      //   currencySlug: this.props.currency.slug,
-      //   featureName: this.state.comment,
-      //   appeal: 2,
-      //   appealNumber: 2,
-      //   appealVoted: [Meteor.userId()],
-      //   flags: 0,
-      //   flagRatio: 0,
-      //   flaggedBy: [],
-      //   commenters: [],
-      //   createdAt: Date.now(),
-      //   author: Meteor.user().username,
-      //   createdBy: Meteor.userId(),
-      //   rating: 1
-      // });
     }
   };
 
@@ -110,7 +94,7 @@ class CoinsComments extends Component {
               placeholderStyle={{ color: "#bfc6ea" }}
               placeholderIconColor="#007aff"
               selectedValue={this.state.stance}
-              onValueChange={this.onValueChange2.bind(this)}
+              onValueChange={this.onValueChange.bind(this)}
             >
               <Picker.Item label="Positive" value="positive" />
               <Picker.Item label="Negative" value="negative" />
