@@ -33,9 +33,9 @@ class CoinsPrice extends Component {
 
   render() {
     const chartConfig = {
-      backgroundGradientFrom: '#1E2923',
-      backgroundGradientTo: '#08130D',
-      color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
+      backgroundGradientFrom: '#ffffff',
+      backgroundGradientTo: '#ffffff',
+      color: (opacity = 1) => `rgba(51, 51, 255, ${opacity})`,
       strokeWidth: 2 // optional, default 3
     }
 
