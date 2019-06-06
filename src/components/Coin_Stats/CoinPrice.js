@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Image } from "react-native";
+import { View, Image, Dimensions } from "react-native";
 import {
   Container,
   Header,
@@ -15,14 +15,30 @@ import {
   Right
 } from "native-base";
 import AppStyle from "../AppStyle";
+import {
+  LineChart,
+  BarChart,
+  PieChart,
+  ProgressChart,
+  ContributionGraph,
+  StackedBarChart
+} from "react-native-chart-kit";
+import { connect } from "react-redux";
 
-export default class CoinsPrice extends Component {
+class CoinsPrice extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
   render() {
+    const chartConfig = {
+      backgroundGradientFrom: '#1E2923',
+      backgroundGradientTo: '#08130D',
+      color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
+      strokeWidth: 2 // optional, default 3
+    }
+
     return (
       <Content>
         <List style={{ flex: 0 }}>
@@ -45,13 +61,36 @@ export default class CoinsPrice extends Component {
             </Body>
           </ListItem>
           <ListItem itemDivider>
-            <Left style={{flex:1}}/>
-            <Body style={{flex:4}}>
+            <Left style={{ flex: 1 }} />
+            <Body style={{ flex: 4 }}>
+              <View style={AppStyle.priceList}>
+                <Text>Fundamental Metrics</Text>
+              </View>
+            </Body>
+            <Right style={{ flex: 1 }}>
+              <Button transparent>
+                <Icon name="help-circle" />
+              </Button>
+            </Right>
+          </ListItem>
+          <ListItem>
+            <View style={AppStyle.priceList}>
+              <ProgressChart
+                data={[0.4, 0.6, 0.8]}
+                width={Dimensions.get('window').width}
+                height={220}
+                chartConfig={chartConfig}
+              />
+            </View>
+          </ListItem>
+          <ListItem itemDivider>
+            <Left style={{ flex: 1 }} />
+            <Body style={{ flex: 4 }}>
               <View style={AppStyle.priceList}>
                 <Text>Bitcoin Comparison Price</Text>
               </View>
             </Body>
-            <Right style={{flex:1}}>
+            <Right style={{ flex: 1 }}>
               <Button transparent>
                 <Icon name="help-circle" />
               </Button>
@@ -63,13 +102,13 @@ export default class CoinsPrice extends Component {
             </View>
           </ListItem>
           <ListItem itemDivider>
-            <Left style={{flex:1}}/>
-            <Body style={{flex:4}}>
+            <Left style={{ flex: 1 }} />
+            <Body style={{ flex: 4 }}>
               <View style={AppStyle.priceList}>
                 <Text>Price per Coin</Text>
               </View>
             </Body>
-            <Right style={{flex:1}}>
+            <Right style={{ flex: 1 }}>
               <Button transparent>
                 <Icon name="help-circle" />
               </Button>
@@ -81,13 +120,13 @@ export default class CoinsPrice extends Component {
             </View>
           </ListItem>
           <ListItem itemDivider>
-            <Left style={{flex:1}}/>
-            <Body style={{flex:4}}>
+            <Left style={{ flex: 1 }} />
+            <Body style={{ flex: 4 }}>
               <View style={AppStyle.priceList}>
                 <Text>ADA per BTC</Text>
               </View>
             </Body>
-            <Right style={{flex:1}}>
+            <Right style={{ flex: 1 }}>
               <Button transparent>
                 <Icon name="help-circle" />
               </Button>
@@ -99,13 +138,13 @@ export default class CoinsPrice extends Component {
             </View>
           </ListItem>
           <ListItem itemDivider>
-            <Left style={{flex:1}}/>
-            <Body style={{flex:4}}>
+            <Left style={{ flex: 1 }} />
+            <Body style={{ flex: 4 }}>
               <View style={AppStyle.priceList}>
                 <Text>Historical Price</Text>
               </View>
             </Body>
-            <Right style={{flex:1}}>
+            <Right style={{ flex: 1 }}>
               <Button transparent>
                 <Icon name="help-circle" />
               </Button>
@@ -121,13 +160,13 @@ export default class CoinsPrice extends Component {
             />
           </ListItem>
           <ListItem itemDivider>
-            <Left style={{flex:1}}/>
-            <Body style={{flex:4}}>
+            <Left style={{ flex: 1 }} />
+            <Body style={{ flex: 4 }}>
               <View style={AppStyle.priceList}>
                 <Text>Coin Distribution</Text>
               </View>
             </Body>
-            <Right style={{flex:1}}>
+            <Right style={{ flex: 1 }}>
               <Button transparent>
                 <Icon name="help-circle" />
               </Button>
@@ -147,3 +186,18 @@ export default class CoinsPrice extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    currency: state.currency
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CoinsPrice);
