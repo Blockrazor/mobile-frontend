@@ -46,7 +46,7 @@ class CointFooter extends Component {
     this.state = {};
   }
 
-  _ChangeCoins(direction) {
+  _LikeCoins(direction) {
     if(this.props.currency._id == undefined){
       //stop it when loading
       return;
@@ -63,14 +63,34 @@ class CointFooter extends Component {
       });
   }
 
+  _ChangeCoins(){
+    if(this.props.currency._id == undefined){
+      //stop it when loading
+      return;
+    }
+      this.props.setCurrency({});
+      this.props.getCurrencies();
+  }
+
   render() {
+    if(!Meteor.user()){
+      return(
+        <Footer>
+        <FooterTab style={AppStyle.footerLight}>
+          <Button full onPress={()=>{this._ChangeCoins()}}>
+            <Icon name="fastforward" style={{ color: "#5cb85c" }} />
+          </Button>
+        </FooterTab>
+      </Footer>
+      )
+    }
     return (
       <Footer>
         <FooterTab style={AppStyle.footerLight}>
-          <Button full onPress={()=>{this._ChangeCoins("down")}}>
+          <Button full onPress={()=>{this._LikeCoins("down")}}>
             <Icon name="close-circle" style={{ color: "#d9534f" }} />
           </Button>
-          <Button full onPress={()=>{this._ChangeCoins("up")}}>
+          <Button full onPress={()=>{this._LikeCoins("up")}}>
             <Icon name="checkmark-circle" style={{ color: "#5cb85c" }} />
           </Button>
         </FooterTab>
