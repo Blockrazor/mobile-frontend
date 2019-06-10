@@ -111,7 +111,7 @@ class AllCoins extends Component {
             />
           </Item>
           <Right style={{ flex: 0.15 }}>
-            <Button transparent onPress={() => this.props.navigation.navigate('LikedCoin')}>
+            <Button transparent onPress={()=>this._navigateToLiked()}>
               <Icon name="heart" style={{ color: "red" }} />
             </Button>
           </Right>
