@@ -63,7 +63,7 @@ class LikedCoinScreen extends Component {
 
     _userLikedCoin = ()=>{
         var likedCoin = Meteor.collection("userPerf").findOne({
-            _id: Meteor.user()._id
+            userId: Meteor.user()._id
         }).likedCoin;
         //console.log(likedCoin);
         return likedCoin;
