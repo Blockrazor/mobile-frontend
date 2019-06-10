@@ -38,6 +38,7 @@ class Profile extends Component {
     Meteor.logout(err => {
       if (err) {
       } else {
+        //console.log("Logged out");
         this.props.navigation.navigate("Home");
       }
     });
@@ -79,6 +80,7 @@ class Profile extends Component {
         </Container>
       );
     }
+    const userdata =  Meteor.collection("userdata").findOne({ _id: Meteor.user()._id });
     return (
       <Container>
         <AndroidBack navigation={this.props.navigation} />
@@ -116,31 +118,31 @@ class Profile extends Component {
               <Text>Krazor Balance</Text>
             </ListItem>
             <ListItem>
-              <Text>{this.props.userdata.balance}</Text>
+              <Text>{userdata.balance}</Text>
             </ListItem>
             <ListItem itemDivider>
               <Text>USD Balance</Text>
             </ListItem>
             <ListItem>
-              <Text>{this.props.userdata.others.USD}</Text>
+              <Text>{userdata.others.USD}</Text>
             </ListItem>
             <ListItem itemDivider>
               <Text>ETH Balance</Text>
             </ListItem>
             <ListItem>
-              <Text>{this.props.userdata.others.ETH}</Text>
+              <Text>{userdata.others.ETH}</Text>
             </ListItem>
             <ListItem itemDivider>
               <Text>XMR Balance</Text>
             </ListItem>
             <ListItem>
-              <Text>{this.props.userdata.others.XMR}</Text>
+              <Text>{userdata.others.XMR}</Text>
             </ListItem>
             <ListItem itemDivider>
               <Text>Input Ranking</Text>
             </ListItem>
             <ListItem>
-              <Text>{this.props.userdata.inputRanking}</Text>
+              <Text>{userdata.inputRanking}</Text>
             </ListItem>
           </List>
         </Content>
@@ -154,6 +156,5 @@ export default withTracker(params => {
 
   return {
     userdataReady: handle.ready(),
-    userdata: Meteor.collection("userdata").findOne({ _id: Meteor.user()._id })
   };
 })(Profile);
