@@ -27,7 +27,7 @@ import {
 import AppStyle from "./AppStyle";
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { connect } from "react-redux";
-import { setCurrency, getCurrencies } from "../redux/app-redux";
+import { setCurrency } from "../redux/app-redux";
 
 
 class AllCoins extends Component {
@@ -44,22 +44,22 @@ class AllCoins extends Component {
     this.props.navigation.navigate("Home");
   };
 
-  _onFeaturePress = slug => {
-    this.props.navigation.navigate("CoinFeatures", { currencySlug: slug });
-  };
-
-  _onRedFlagPress = (slug, id) => {
-    this.props.navigation.navigate("CoinRedFlag", {
-      currencySlug: slug,
-      currencyId: id
-    });
-  };
-
   SearchFilterFunction(keyword) {
     key = new RegExp(keyword);
     this.setState({
       keyword: keyword
     });
+  }
+
+  _navigateToLiked = () => {
+    if (!Meteor.user()) {
+      //Not Logged In
+      alert("Please Login!");
+    }
+    else{
+      //Logged In  
+      this.props.navigation.navigate('LikedCoin');
+    }
   }
 
   render() {
@@ -75,10 +75,15 @@ class AllCoins extends Component {
                 <Icon name="arrow-back" />
               </Button>
             </Left>
-            <Item style={{ flex: 0.9 }}>
+            <Item style={{ flex: 0.8 }}>
               <Icon name={"search"} />
               <Input />
             </Item>
+            <Right style={{ flex: 0.15 }}>
+              <Button transparent onPress={()=>this._navigateToLiked()}>
+                <Icon name="heart" style={{ color: "red" }} />
+              </Button>
+            </Right>
           </Header>
           <ActivityIndicator size="large" />
         </Container>
@@ -105,9 +110,9 @@ class AllCoins extends Component {
               value={this.state.keyword}
             />
           </Item>
-          <Right style={{flex: 0.15}}>
-          <Button transparent onPress={() => this.props.navigation.goBack()}>
-              <Icon name="heart"  style={{color:"red"}}/>
+          <Right style={{ flex: 0.15 }}>
+            <Button transparent onPress={()=>this._navigateToLiked()}>
+              <Icon name="heart" style={{ color: "red" }} />
             </Button>
           </Right>
         </Header>
@@ -186,9 +191,6 @@ const mapDispatchToProps = dispatch => {
     setCurrency: currency => {
       dispatch(setCurrency(currency));
     },
-    getCurrencies: () => {
-      dispatch(getCurrencies());
-    }
   };
 };
 
