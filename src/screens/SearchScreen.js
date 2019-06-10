@@ -4,7 +4,7 @@ import Search from '../components/Coin_Stats/CoinSearch';
 import NormalHeader from '../components/Header';
 import { Container } from 'native-base';
 import AllCoins from '../components/AllCoins';
-export default class WallScreen extends Component {
+export default class SearchScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {

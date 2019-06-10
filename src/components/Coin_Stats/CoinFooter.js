@@ -21,6 +21,7 @@ import {
 import AppStyle from "../AppStyle";
 import { connect } from "react-redux";
 import { setCurrency , getCurrencies} from "../../redux/app-redux";
+import Meteor from "react-native-meteor";
 
 const mapStateToProps = state => {
   return {
@@ -45,19 +46,27 @@ class CointFooter extends Component {
     this.state = {};
   }
 
-  _ChangeCoins() {
+  _ChangeCoins(direction) {
       this.props.setCurrency({});
       this.props.getCurrencies();
+      Meteor.call("VoteCoinPerf", this.props.currency._id ,direction , (err, data)=>{
+        if(!err){
+          
+        }
+        else{
+          console.log(err.reason);
+        }
+      });
   }
 
   render() {
     return (
       <Footer>
         <FooterTab style={AppStyle.footerLight}>
-          <Button full onPress={()=>{this._ChangeCoins()}}>
+          <Button full onPress={()=>{this._ChangeCoins("down")}}>
             <Icon name="close-circle" style={{ color: "#d9534f" }} />
           </Button>
-          <Button full onPress={()=>{this._ChangeCoins()}}>
+          <Button full onPress={()=>{this._ChangeCoins("up")}}>
             <Icon name="checkmark-circle" style={{ color: "#5cb85c" }} />
           </Button>
         </FooterTab>
@@ -72,4 +81,3 @@ export default connect(
   )(
     (CointFooter)
   );
-  

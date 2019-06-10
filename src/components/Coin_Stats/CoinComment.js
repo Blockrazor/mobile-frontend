@@ -139,6 +139,8 @@ export default connect(
   withTracker(params => {
     const FeatureHandle = Meteor.subscribe("features");
     const RedFlagHandle = Meteor.subscribe("redflags");
+    // const CoinPerf = Meteor.subscribe("coinPerf");
+    // console.log(Meteor.collection("coinPerf").find());
     return {
       featureReady: FeatureHandle.ready(),
       redFlagReady: RedFlagHandle.ready()

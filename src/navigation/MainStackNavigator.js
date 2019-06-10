@@ -8,6 +8,7 @@ import WallScreen from '../screens/WallScreen';
 import CoinFeatures from '../screens/CoinFeatures';
 import CoinSummary from '../screens/CoinSummary';
 import CoinRedFlag from '../screens/CoinrRedFlag';
+import LikedCoinScreen from '../screens/LikedCoinScreen';
 import { Icon } from 'native-base';
 
 const HomeStack = createStackNavigator(
@@ -20,6 +21,9 @@ const HomeStack = createStackNavigator(
     },
     Search: {
       screen: SearchScreen,
+    },
+    LikedCoin: {
+      screen: LikedCoinScreen,
     },
     Wall: {
       screen: WallScreen,
