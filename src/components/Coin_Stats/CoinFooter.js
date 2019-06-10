@@ -47,6 +47,10 @@ class CointFooter extends Component {
   }
 
   _ChangeCoins(direction) {
+    if(this.props.currency._id == undefined){
+      //stop it when loading
+      return;
+    }
       this.props.setCurrency({});
       this.props.getCurrencies();
       Meteor.call("VoteCoinPerf", this.props.currency._id ,direction , (err, data)=>{
