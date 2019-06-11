@@ -56,7 +56,7 @@ class CoinsPrice extends Component {
                   fontWeight: "bold"
                 }}
               >
-                Cardano
+                {this.props.currency.currencyName}
               </Text>
             </Body>
           </ListItem>
