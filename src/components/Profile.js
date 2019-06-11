@@ -20,11 +20,16 @@ import {
   Left,
   Body,
   Right,
-  Thumbnail
+  Thumbnail,
+  Tab,
+  Tabs,
+  TabHeading,
 } from "native-base";
 import AndroidBack from "./AndroidBack";
 import LoginHeader from "./Header";
 import Meteor, { withTracker, MeteorListView } from "react-native-meteor";
+import AppStyle from '../components/AppStyle';
+
 
 class Profile extends Component {
   constructor(props) {
@@ -44,7 +49,7 @@ class Profile extends Component {
     });
   }
   render() {
-    if (!Meteor.user()) {
+    if (!this.props.userdataReady || !Meteor.user()) {
       return (
         <Container>
           <AndroidBack navigation={this.props.navigation} />
@@ -62,25 +67,7 @@ class Profile extends Component {
         </Container>
       );
     }
-    if (!this.props.userdataReady) {
-      return (
-        <Container>
-          <AndroidBack navigation={this.props.navigation} />
-          <LoginHeader
-            title="Profile"
-            navigation={this.props.navigation}
-            dest="Main"
-          />
-          <Content>
-            <Text />
-            <Text />
-            <Text />
-            <ActivityIndicator size="large" />
-          </Content>
-        </Container>
-      );
-    }
-    const userdata =  Meteor.collection("userdata").findOne({ _id: Meteor.user()._id });
+    const userdata = Meteor.collection("userdata").findOne({ _id: Meteor.user()._id });
     return (
       <Container>
         <AndroidBack navigation={this.props.navigation} />
@@ -89,63 +76,92 @@ class Profile extends Component {
           navigation={this.props.navigation}
           dest="Main"
         />
-        <Content>
-          <List>
-            <ListItem style={{ marginLeft: 0, paddingLeft: 15 }}>
-              <Left>
-                <Text>{Meteor.user().username}</Text>
-              </Left>
-              <Right>
-                <Button transparent onPress={this.onLogoutPress.bind(this)}>
-                  <Icon name="log-out" />
-                </Button>
-              </Right>
-            </ListItem>
-            <ListItem>
-              <Thumbnail
-                source={{
-                  uri: "https://blockrazor.org/codebase_images/noprofile.png"
-                }}
-              />
-            </ListItem>
-            <ListItem itemDivider>
-              <Text>Email</Text>
-            </ListItem>
-            <ListItem>
-              <Text>{Meteor.user().emails[0].address}</Text>
-            </ListItem>
-            <ListItem itemDivider>
-              <Text>Krazor Balance</Text>
-            </ListItem>
-            <ListItem>
-              <Text>{userdata.balance}</Text>
-            </ListItem>
-            <ListItem itemDivider>
-              <Text>USD Balance</Text>
-            </ListItem>
-            <ListItem>
-              <Text>{userdata.others.USD}</Text>
-            </ListItem>
-            <ListItem itemDivider>
-              <Text>ETH Balance</Text>
-            </ListItem>
-            <ListItem>
-              <Text>{userdata.others.ETH}</Text>
-            </ListItem>
-            <ListItem itemDivider>
-              <Text>XMR Balance</Text>
-            </ListItem>
-            <ListItem>
-              <Text>{userdata.others.XMR}</Text>
-            </ListItem>
-            <ListItem itemDivider>
-              <Text>Input Ranking</Text>
-            </ListItem>
-            <ListItem>
-              <Text>{userdata.inputRanking}</Text>
-            </ListItem>
-          </List>
-        </Content>
+        <Tabs
+          style={Platform.OS === "android" ? { overflow: "hidden" } : {}}
+          onChangeTab={({ i }) => this.setState({ currentPage: i })}
+          ref={(c) => { this.tabs = c; return; }}
+        >
+          <Tab
+            heading={
+              <TabHeading style={AppStyle.tabDark}>
+                <Text>Profile</Text>
+              </TabHeading>
+            }
+          >
+            <Content>
+              <List>
+                <ListItem itemDivider>
+                  <Text>UserName</Text>
+                </ListItem>
+                <ListItem style={{ marginLeft: 0, paddingLeft: 15 }}>
+                  <Text>{Meteor.user().username}</Text>
+
+                </ListItem>
+                <ListItem itemDivider>
+                  <Text>Email</Text>
+                </ListItem>
+                <ListItem>
+                  <Text>{Meteor.user().emails[0].address}</Text>
+                </ListItem>
+                <ListItem itemDivider>
+                  <Text>Role</Text>
+                </ListItem>
+                <ListItem>
+                  <Text>{userdata.moderator ? "Moderator " : ""} {userdata.developer ? "Developer " : ""}</Text>
+                </ListItem>
+                <ListItem itemDivider>
+                  <Text>About Me</Text>
+                </ListItem>
+                <ListItem>
+                  <Text>{Meteor.user().bio}</Text>
+                </ListItem>
+                <ListItem itemDivider>
+                  <Text>Input Ranking</Text>
+                </ListItem>
+                <ListItem>
+                  <Text>{userdata.inputRanking}</Text>
+                </ListItem>
+              </List>
+            </Content>
+          </Tab>
+          <Tab
+            heading={
+              <TabHeading style={AppStyle.tabDark}>
+                <Text>Wallet</Text>
+              </TabHeading>
+            }
+          >
+            <Content>
+              <List>
+                <ListItem itemDivider>
+                  <Text>Krazor Balance</Text>
+                </ListItem>
+                <ListItem>
+                  <Text>{userdata.balance}</Text>
+                </ListItem>
+                <ListItem itemDivider>
+                  <Text>USD Balance</Text>
+                </ListItem>
+                <ListItem>
+                  <Text>{userdata.others.USD}</Text>
+                </ListItem>
+                <ListItem itemDivider>
+                  <Text>ETH Balance</Text>
+                </ListItem>
+                <ListItem>
+                  <Text>{userdata.others.ETH}</Text>
+                </ListItem>
+                <ListItem itemDivider>
+                  <Text>XMR Balance</Text>
+                </ListItem>
+                <ListItem>
+                  <Text>{userdata.others.XMR}</Text>
+                </ListItem>
+              </List>
+            </Content>
+          </Tab>
+        </Tabs>
+
       </Container>
     );
   }
@@ -158,3 +174,5 @@ export default withTracker(params => {
     userdataReady: handle.ready(),
   };
 })(Profile);
+
+

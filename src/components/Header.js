@@ -13,13 +13,24 @@ import {
   Input
 } from "native-base";
 import AppStyle from "./AppStyle";
+import Meteor from "react-native-meteor";
 
 export default class NormalHeader extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      keyword : "",
+      keyword: "",
     };
+  }
+
+  onLogoutPress() {
+    Meteor.logout(err => {
+      if (err) {
+      } else {
+        //console.log("Logged out");
+        this.props.navigation.navigate("Home");
+      }
+    });
   }
 
   _renderleftbutton() {
@@ -41,20 +52,25 @@ export default class NormalHeader extends Component {
     }
   }
   _renderrightbutton() {
+    if (this.props.title == "Profile") {
+      return <Button transparent onPress={this.onLogoutPress.bind(this)}>
+        <Icon name="ios-log-out" />
+      </Button>;
+    }
     return;
   }
 
   _renderbody() {
     return <Title style={{ color: "white" }}>{this.props.title}</Title>;
   }
-   
+
   render() {
-      return (
-        <Header hasTabs style={AppStyle.headerDark}>
-          <Left>{this._renderleftbutton()}</Left>
-          <Body>{this._renderbody()}</Body>
-          <Right>{this._renderrightbutton()}</Right>
-        </Header>
-      );
-    }
+    return (
+      <Header hasTabs style={AppStyle.headerDark}>
+        <Left>{this._renderleftbutton()}</Left>
+        <Body>{this._renderbody()}</Body>
+        <Right>{this._renderrightbutton()}</Right>
+      </Header>
+    );
+  }
 }
