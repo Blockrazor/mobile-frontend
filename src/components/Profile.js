@@ -21,6 +21,8 @@ import {
   Body,
   Right,
   Thumbnail,
+  Input,
+  Item,
   Tab,
   Tabs,
   TabHeading,
@@ -36,9 +38,29 @@ class Profile extends Component {
     super(props);
     this.state = {
       user: this.props.user,
-      loggedIn: this.props.loggedIn
+      loggedIn: this.props.loggedIn,
+      loading: false,
+      editing: false,
+      userName: "",
+      email: "",
+      bio: "",
     };
   }
+
+  _setUserState = () => {
+    this.setState(
+      {
+        userName: Meteor.user().username,
+        email: Meteor.user().emails[0].address,
+        bio: Meteor.user().bio,
+      }
+    );
+  }
+
+  componentDidMount() {
+    this._setUserState();
+  }
+
   onLogoutPress() {
     Meteor.logout(err => {
       if (err) {
@@ -48,8 +70,90 @@ class Profile extends Component {
       }
     });
   }
+
+  _renderUserName = () => {
+    if (this.state.editing) {
+      return <Item>
+        <Input
+          value={this.state.userName}
+          onChangeText={(text) => this.setState({ userName: text })}
+        />
+      </Item>
+    }
+    else {
+      return <Text>{Meteor.user().username}</Text>
+    }
+  }
+
+  _renderUserEmail = () => {
+    if (this.state.editing) {
+      return <Item>
+        <Input
+          value={this.state.email}
+          onChangeText={(text) => this.setState({ email: text })}
+        />
+      </Item>
+    }
+    else {
+      return <Text>{Meteor.user().emails[0].address}</Text>
+    }
+  }
+
+  _renderUserBio = () => {
+    if (this.state.editing) {
+      return <Item>
+        <Input
+          value={this.state.bio}
+          onChangeText={(text) => this.setState({ bio: text })}
+        />
+      </Item>
+    }
+    else {
+      return <Text>{Meteor.user().bio}</Text>
+    }
+  }
+
+  _submitEditProfile(){
+    this.setState({loading: true});
+
+    var data = {
+        email: this.state.email,
+        bio: this.state.bio,
+        username: this.state.userName,
+        secret: window.secret ? window.secret.base32 : '',
+        userToken: undefined,
+        status2fa: false,
+    }
+
+    Meteor.call('editProfile', data, (err, data) => {
+      this.setState({editing: false, loading: false})
+      if(err){
+        console.log(err);
+      }
+    }
+    );
+  }
+
+  _renderSubmit = () => {
+    if (this.state.editing) {
+      return <Right>
+          <Button transparent
+          onPress={()=>{
+            this._submitEditProfile();
+          }}
+          >
+            <Text> Submit </Text>
+          </Button>
+        </Right>
+    }
+    else {
+      return
+    }
+  }
+
+
   render() {
-    if (!this.props.userdataReady || !Meteor.user()) {
+    if (!this.props.userdataReady || !Meteor.user() || this.state.loading) {
       return (
         <Container>
           <AndroidBack navigation={this.props.navigation} />
@@ -91,36 +195,58 @@ class Profile extends Component {
             <Content>
               <List>
                 <ListItem itemDivider>
-                  <Text>UserName</Text>
+                  <Left>
+                    <Text>UserName</Text>
+                  </Left>
+                  <Right>
+                    <Button small transparent
+                      onPress={() => {
+                        this._setUserState();
+                        this.setState({ editing: !this.state.editing })
+                      }}
+                    >
+                      <Icon name="ios-create" />
+                    </Button>
+                  </Right>
                 </ListItem>
                 <ListItem style={{ marginLeft: 0, paddingLeft: 15 }}>
-                  <Text>{Meteor.user().username}</Text>
-
+                  {this._renderUserName()}
                 </ListItem>
                 <ListItem itemDivider>
-                  <Text>Email</Text>
+                  <Left>
+                    <Text>Email</Text>
+                  </Left>
+                  <Right>
+                    <Button small transparent
+                      onPress={() => {
+                        this._setUserState();
+                        this.setState({ editing: !this.state.editing })
+                      }}>
+                      <Icon name="ios-create" />
+                    </Button>
+                  </Right>
                 </ListItem>
                 <ListItem>
-                  <Text>{Meteor.user().emails[0].address}</Text>
+                  {this._renderUserEmail()}
                 </ListItem>
                 <ListItem itemDivider>
-                  <Text>Role</Text>
+                  <Left>
+                    <Text>About Me</Text>
+                  </Left>
+                  <Right>
+                    <Button small transparent
+                      onPress={() => {
+                        this._setUserState();
+                        this.setState({ editing: !this.state.editing })
+                      }}>
+                      <Icon name="ios-create" />
+                    </Button>
+                  </Right>
                 </ListItem>
                 <ListItem>
-                  <Text>{userdata.moderator ? "Moderator " : ""} {userdata.developer ? "Developer " : ""}</Text>
+                  {this._renderUserBio()}
                 </ListItem>
-                <ListItem itemDivider>
-                  <Text>About Me</Text>
-                </ListItem>
-                <ListItem>
-                  <Text>{Meteor.user().bio}</Text>
-                </ListItem>
-                <ListItem itemDivider>
-                  <Text>Input Ranking</Text>
-                </ListItem>
-                <ListItem>
-                  <Text>{userdata.inputRanking}</Text>
-                </ListItem>
+                {this._renderSubmit()}
               </List>
             </Content>
           </Tab>
@@ -156,6 +282,30 @@ class Profile extends Component {
                 </ListItem>
                 <ListItem>
                   <Text>{userdata.others.XMR}</Text>
+                </ListItem>
+              </List>
+            </Content>
+          </Tab>
+          <Tab
+            heading={
+              <TabHeading style={AppStyle.tabDark}>
+                <Text>Role</Text>
+              </TabHeading>
+            }
+          >
+            <Content>
+              <List>
+                <ListItem itemDivider>
+                  <Text>Role</Text>
+                </ListItem>
+                <ListItem>
+                  <Text>{userdata.moderator ? "Moderator " : ""} {userdata.developer ? "Developer " : ""}</Text>
+                </ListItem>
+                <ListItem itemDivider>
+                  <Text>Input Ranking</Text>
+                </ListItem>
+                <ListItem>
+                  <Text>{userdata.inputRanking}</Text>
                 </ListItem>
               </List>
             </Content>
