@@ -25,6 +25,7 @@ import {
   Title
 } from "native-base";
 import { Col, Row, Grid } from "react-native-easy-grid";
+import { connect } from "react-redux";
 
 class CoinSummary extends Component {
   constructor(props) {
@@ -92,7 +93,7 @@ class CoinSummary extends Component {
         <AndroidBack navigation={this.props.navigation} />
         <CoinHeader title="Summary" navigation={this.props.navigation} />
         <Title style={{ paddingTop: 10, paddingBottom: 10, color: "black" }}>
-          {this.props.navigation.getParam("currencySlug", "Coin")}
+          {this.props.currency.currencyName}
         </Title>
         <MeteorComplexListView
           elements={() => {
@@ -112,10 +113,31 @@ class CoinSummary extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    currency: state.currency
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+
+
 export default withTracker(params => {
   //const handle = Meteor.subscribe("auctions");
   const handle = Meteor.subscribe("summaries");
   return {
     dataReady: handle.ready()
   };
-})(CoinSummary);
+})(connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(
+  withTracker(params => {
+    const handle = Meteor.subscribe("summaries");
+    return {
+      dataReady: handle.ready()
+    };
+  })(CoinSummary)
+));
