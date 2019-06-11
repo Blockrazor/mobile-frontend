@@ -66,15 +66,15 @@ class CoinsComments extends Component {
 
   _addComment = () => {
     if (this.state.stance == "positive") {
-      // Meteor.call('newComment', this.props.currency._id, this.state.comment, 1, true, function(error, result) {
-      //   if(!error) {
-      //     console.log('success');
-      //   } else {
-      //     console.log(error);
-      //     return;
-      //   }
-      // });
-    }
+    //   Meteor.call('newFeature', this.props.currency._id, this.state.comment, "pass", function(error, result) {
+    //     if(!error) {
+    //       console.log('success');
+    //     } else {
+    //       console.log(error);
+    //       return;
+    //     }
+    //   });
+     }
   };
 
   render() {

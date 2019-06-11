@@ -11,7 +11,7 @@ export default class App extends React.Component {
 
   componentWillMount() {
     // const url = 'ws://blockrazor.org:80/websocket';
-    const url = 'ws://localhost:3000/websocket';
+     const url = 'ws://localhost:3000/websocket';
     Meteor.connect(url);
   }
   

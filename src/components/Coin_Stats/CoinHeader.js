@@ -4,6 +4,7 @@ import { Header, Left, Right, Body, Title, Button, Icon, Text } from 'native-bas
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import ActionSheet from 'react-native-actionsheet'
 import AppStyle from "../AppStyle";
+import Meteor from "react-native-meteor";
 
 export default class CoinHeader extends Component {
   constructor(props) {
@@ -77,7 +78,7 @@ export default class CoinHeader extends Component {
         <ActionSheet
           ref={o => this.ActionSheet = o}
           //title={'Which one do you like ?'}
-          options={['Login/Sign Up', 'About deeqBloq', 'Cancel']}
+          options={[ Meteor.user() ? 'Profile' : 'Login/Sign Up', 'About deeqBloq', 'Cancel']}
           cancelButtonIndex={2}
           //destructiveButtonIndex={1}
           onPress={this._onPressActionList}
