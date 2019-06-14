@@ -78,22 +78,6 @@ class TopCommentCard extends Component {
         <Body>
           <Text note>Top Negative Comment</Text>
           <Text>{redflag.name}</Text>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            <Button transparent>
-              <Icon name="thumbs-up" style={{ color: "#ffffff" }} />
-            </Button>
-            <Text>{appealVote}</Text>
-            <Button transparent style={{ marginLeft: 40 }}>
-              <Icon name="thumbs-down" style={{ color: "#ffffff" }} />
-            </Button>
-            <Text>{downVote}</Text>
-          </View>
         </Body>
       );
     } else {
