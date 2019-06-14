@@ -44,30 +44,14 @@ class TopCommentCard extends Component {
       }
       return (
         <Body>
-          <Text note>Top Feature</Text>
+          <Text note>Top Positive Comment</Text>
           <Text>{feature.featureName}</Text>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            <Button transparent>
-              <Icon name="thumbs-up" style={{ color: "#ffffff" }} />
-            </Button>
-            <Text>{appealVote}</Text>
-            <Button transparent style={{ marginLeft: 40 }}>
-              <Icon name="thumbs-down" style={{ color: "#ffffff" }} />
-            </Button>
-            <Text>{downVote}</Text>
-          </View>
         </Body>
       );
     } else {
       return (
         <Body>
-          <Text note>Top Feature</Text>
+          <Text note>Top Positive Comment</Text>
           <Text numberOfLines={5}>No feature yet</Text>
         </Body>
       );
@@ -92,7 +76,7 @@ class TopCommentCard extends Component {
       }
       return (
         <Body>
-          <Text note>Top RedFlag</Text>
+          <Text note>Top Negative Comment</Text>
           <Text>{redflag.name}</Text>
           <View
             style={{
@@ -115,7 +99,7 @@ class TopCommentCard extends Component {
     } else {
       return (
         <Body>
-          <Text note>Top RedFlag</Text>
+          <Text note>Top Negative Comment</Text>
           <Text numberOfLines={5}>No RedFlag yet</Text>
         </Body>
       );
