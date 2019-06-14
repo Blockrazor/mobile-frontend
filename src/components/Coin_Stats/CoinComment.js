@@ -76,7 +76,14 @@ class CoinsComments extends Component {
       });
     }
     else if( this.state.stance == "negative") {
-
+      Meteor.call('newRedFlagMethod', this.props.currency._id, this.state.comment, "pass", (err, data) => {
+        if(!err) {
+          console.log('success added redflag');
+        } else {
+          console.log(err);
+          return;
+        }
+      });
     }
   };
 
