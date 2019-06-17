@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, ScrollView, ActivityIndicator, FlatList } from "react-native";
+import { View, ScrollView, ActivityIndicator, FlatList, Alert, DeviceEventEmitter } from "react-native";
 import { Text, Button, Icon, Item, Input, Picker ,Title} from "native-base";
 import CommentCard from "./CommentCard";
 import { connect } from "react-redux";
@@ -64,28 +64,71 @@ class CoinsComments extends Component {
     return <CommentCard comment={comment.item} />;
   };
 
-  _addComment = () => {
-    if (this.state.stance == "positive") {
+  _addComment = (stance) => {
+    if (stance == "positive") {
       Meteor.call('addNewFeatureMobile', this.props.currency._id, this.state.comment, "pass", function(error, result) {
         if(!error) {
           console.log('success added feature (some errors are not reflected)'); //some errors are not reflected
+          DeviceEventEmitter.emit('showToast', "your comment is added successfully");
         } else {
           console.log(error);
+          DeviceEventEmitter.emit('showToast', error.message);
           return;
         }
       });
     }
-    else if( this.state.stance == "negative") {
+    else if(stance == "negative") {
       Meteor.call('newRedFlagMethod', this.props.currency._id, this.state.comment, "pass", (err, data) => {
         if(!err) {
-          console.log('success added redflag');
+          DeviceEventEmitter.emit('showToast', "your comment is added successfully");
+        //  console.log('success added redflag');
         } else {
-          console.log(err);
+          DeviceEventEmitter.emit('showToast', err.message);
+         // console.log(err);
           return;
         }
       });
     }
   };
+
+  _renderAddComment = ()=>{
+    if(Meteor.user()){
+      return <View>
+      <Item>
+        <Input
+          style={{ flex: 0.85 }}
+          placeholder="Your comment here..."
+          onChangeText={comment => this.setState({ comment: comment })}
+        />
+        <Button
+          transparent
+          onPress={() => {
+            if(!Meteor.user()){
+              alert('Please Login to add comment');
+              return;
+            }
+            Alert.alert(
+              'Please Choose your stance',
+              '',
+              [
+                {text: 'Cancel', onPress: () => console.log('Ask me later pressed'), style: 'cancel'},
+                {text: 'Positive', onPress: () => {this._addComment("positive")}},
+                {text: 'Negative', onPress: () => {this._addComment("negative")}},
+              ],
+              {cancelable: true},
+            );
+          }}
+          style={{ flex: 0.15 }}
+        >
+          <Icon name="send" />
+        </Button>
+      </Item>
+    </View>     
+  }
+  else{
+    return
+  }
+}
 
   render() {
     if (!(this.props.redFlagReady && this.props.featureReady)) {
@@ -95,38 +138,7 @@ class CoinsComments extends Component {
       <View style={{ flex: 1 }}>
       <Title style={{color:"#000000", marginBottom: 6, marginTop:6}}>{this.props.currency.currencyName}</Title>
         <ScrollView>{this._renderComments()}</ScrollView>
-        <View>
-          <Item picker>
-            <Picker
-              mode="dropdown"
-              style={{ width: undefined }}
-              placeholder="Please choose your stance"
-              placeholderStyle={{ color: "#bfc6ea" }}
-              placeholderIconColor="#007aff"
-              selectedValue={this.state.stance}
-              onValueChange={this.onValueChange.bind(this)}
-            >
-              <Picker.Item label="Positive" value="positive" />
-              <Picker.Item label="Negative" value="negative" />
-            </Picker>
-          </Item>
-          <Item>
-            <Input
-              style={{ flex: 0.85 }}
-              placeholder="Your comment here..."
-              onChangeText={comment => this.setState({ comment: comment })}
-            />
-            <Button
-              transparent
-              onPress={() => {
-                this._addComment();
-              }}
-              style={{ flex: 0.15 }}
-            >
-              <Icon name="send" />
-            </Button>
-          </Item>
-        </View>
+        {this._renderAddComment()}
       </View>
     );
   }
