@@ -71,7 +71,7 @@ class PriceCard extends Component {
         <ListItem style={{ marginLeft: 0, paddingLeft: 15 }}>
           <Grid>
             <Col>
-              <Text>{this.props.currency.cpt}</Text>
+              <Text>{this.props.currency.bcp}</Text>
               <Text style={{ fontSize: 10, fontWeight: "bold" }}>BCP</Text>
             </Col>
             <Col>

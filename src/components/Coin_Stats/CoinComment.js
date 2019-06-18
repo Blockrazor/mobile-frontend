@@ -12,6 +12,7 @@ class CoinsComments extends Component {
       stance: undefined,
       comment: ""
     };
+    Meteor.call('updateMarketCap2');
   }
   onValueChange(value) {
     this.setState({
