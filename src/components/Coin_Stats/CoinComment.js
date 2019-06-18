@@ -71,6 +71,7 @@ class CoinsComments extends Component {
         if(!error) {
           console.log('success added feature (some errors are not reflected)'); //some errors are not reflected
           DeviceEventEmitter.emit('showToast', "your comment is added successfully");
+          this.setState({comment : ''});
         } else {
           console.log(error);
           DeviceEventEmitter.emit('showToast', error.message);
@@ -82,6 +83,7 @@ class CoinsComments extends Component {
       Meteor.call('newRedFlagMethod', this.props.currency._id, this.state.comment, "pass", (err, data) => {
         if(!err) {
           DeviceEventEmitter.emit('showToast', "your comment is added successfully");
+          this.setState({comment : ''});
         //  console.log('success added redflag');
         } else {
           DeviceEventEmitter.emit('showToast', err.message);
@@ -101,6 +103,7 @@ class CoinsComments extends Component {
           style={{ flex: 0.85 }}
           placeholder="Your comment here..."
           onChangeText={comment => this.setState({ comment: comment })}
+          value={this.state.comment}
         />
         <Button
           transparent
