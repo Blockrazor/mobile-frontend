@@ -19,7 +19,6 @@ import Price from "../components/Coin_Stats/CoinPrice";
 import AppStyle from "../components/AppStyle";
 import { connect } from "react-redux";
 import { setCurrency, getCurrencies } from "../redux/app-redux";
-import MeteorListView from "react-native-meteor/src/components/ListView";
 
 const mapStateToProps = state => {
   return {
