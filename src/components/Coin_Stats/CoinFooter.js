@@ -51,6 +51,11 @@ class CointFooter extends Component {
       //stop it when loading
       return;
     }
+    if(!Meteor.user()){
+      //stop it when user is not logged in
+      alert('Please Login to like/dislike');
+      return;
+    }
       this.props.setCurrency({});
       this.props.getCurrencies();
       Meteor.call("VoteCoinPerf", this.props.currency._id ,direction , (err, data)=>{
@@ -73,17 +78,17 @@ class CointFooter extends Component {
   }
 
   render() {
-    if(!Meteor.user()){
-      return(
-        <Footer>
-        <FooterTab style={AppStyle.footerLight}>
-          <Button full onPress={()=>{this._ChangeCoins()}}>
-            <Icon name="fastforward" style={{ color: "#5cb85c" }} />
-          </Button>
-        </FooterTab>
-      </Footer>
-      )
-    }
+    // if(!Meteor.user()){
+    //   return(
+    //     <Footer>
+    //     <FooterTab style={AppStyle.footerLight}>
+    //       <Button full onPress={()=>{this._ChangeCoins()}}>
+    //         <Icon name="fastforward" style={{ color: "#5cb85c" }} />
+    //       </Button>
+    //     </FooterTab>
+    //   </Footer>
+    //   )
+    // }
     return (
       <Footer>
         <FooterTab style={AppStyle.footerLight}>

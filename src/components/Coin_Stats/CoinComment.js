@@ -93,7 +93,8 @@ class CoinsComments extends Component {
   };
 
   _renderAddComment = ()=>{
-    if(Meteor.user()){
+    // if(Meteor.user())
+    {
       return <View>
       <Item>
         <Input
@@ -125,9 +126,6 @@ class CoinsComments extends Component {
         </Button>
       </Item>
     </View>     
-  }
-  else{
-    return
   }
 }
 
