@@ -24,6 +24,8 @@ import {
   StackedBarChart
 } from "react-native-chart-kit";
 import { connect } from "react-redux";
+import Tooltip from 'react-native-walkthrough-tooltip';
+
 
 class CoinsPrice extends Component {
   constructor(props) {
@@ -91,14 +93,23 @@ class CoinsPrice extends Component {
               </View>
             </Body>
             <Right style={{ flex: 1 }}>
-              <Button transparent>
-                <Icon name="help-circle" />
-              </Button>
+              <Tooltip
+                animated
+                isVisible={this.state.bcpToolTipVisible}
+                content={<View><Text>The price of all coins has been converted to the price they would be if they represented the exact same 'shareholding' as the shareholding that 1 BTC gives you on Bitcoin. </Text></View>}
+                displayArea={{x:0 ,y:0,width:Dimensions.get('screen').width, height: Dimensions.get('screen').height}}
+                placement="top"
+                onClose={() => this.setState({ bcpToolTipVisible: false })}
+              >
+                <Button transparent onPress={() => this.setState({ bcpToolTipVisible: true })}>
+                  <Icon name="help-circle" />
+                </Button>
+              </Tooltip>
             </Right>
           </ListItem>
           <ListItem>
             <View style={AppStyle.priceList}>
-              <Text style={AppStyle.priceNumber}>$94</Text>
+              <Text style={AppStyle.priceNumber}>{this.props.currency.bcp}</Text>
             </View>
           </ListItem>
           <ListItem itemDivider>
@@ -123,7 +134,7 @@ class CoinsPrice extends Component {
             <Left style={{ flex: 1 }} />
             <Body style={{ flex: 4 }}>
               <View style={AppStyle.priceList}>
-                <Text>ADA per BTC</Text>
+                <Text>{this.props.currency.currencySymbol} per BTC</Text>
               </View>
             </Body>
             <Right style={{ flex: 1 }}>
