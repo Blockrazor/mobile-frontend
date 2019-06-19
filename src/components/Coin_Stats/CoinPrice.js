@@ -99,6 +99,7 @@ class CoinsPrice extends Component {
                 content={<View><Text>The price of all coins has been converted to the price they would be if they represented the exact same 'shareholding' as the shareholding that 1 BTC gives you on Bitcoin. </Text></View>}
                 displayArea={{x:0 ,y:0,width:Dimensions.get('screen').width, height: Dimensions.get('screen').height}}
                 placement="top"
+                onChildPress={()=>{this.setState({bcpToolTipVisible : false})}}
                 onClose={() => this.setState({ bcpToolTipVisible: false })}
               >
                 <Button transparent onPress={() => this.setState({ bcpToolTipVisible: true })}>
