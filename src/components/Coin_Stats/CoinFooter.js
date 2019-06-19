@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Platform } from "react-native";
+import { View, Platform, AsyncStorage } from "react-native";
 import {
   ListItem,
   Icon,
@@ -20,12 +20,15 @@ import {
 } from "native-base";
 import AppStyle from "../AppStyle";
 import { connect } from "react-redux";
-import { setCurrency , getCurrencies} from "../../redux/app-redux";
+import { setCurrency, getCurrencies } from "../../redux/app-redux";
 import Meteor from "react-native-meteor";
+import Tooltip from 'react-native-walkthrough-tooltip';
 
 const mapStateToProps = state => {
   return {
-    currency: state.currency
+    currency: state.currency,
+    likeToolTipVisible: false,
+    firstTimeLike: false,
   };
 };
 
@@ -34,8 +37,8 @@ const mapDispatchToProps = dispatch => {
     setCurrency: currency => {
       dispatch(setCurrency(currency));
     },
-    getCurrencies: ()=>{
-        dispatch(getCurrencies());
+    getCurrencies: () => {
+      dispatch(getCurrencies());
     }
   };
 };
@@ -45,36 +48,61 @@ class CointFooter extends Component {
     super(props);
     this.state = {};
   }
+  
+  componentDidMount() {
+    // AsyncStorage.removeItem('firstTimeLike', (error) => {  });
+  }
+
+  isFirstTimeLike = () => {
+    AsyncStorage.getItem('firstTimeLike').then((value) => {
+      if (value == null) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }).catch((error) => {
+      console.log(error);
+      return false;
+    })
+  }
 
   _LikeCoins(direction) {
-    if(this.props.currency._id == undefined){
+    if (this.props.currency._id == undefined) {
       //stop it when loading
       return;
     }
-    if(!Meteor.user()){
+    if (!Meteor.user()) {
       //stop it when user is not logged in
       alert('Please Login to like/dislike');
       return;
     }
-      this.props.setCurrency({});
-      this.props.getCurrencies();
-      Meteor.call("VoteCoinPerf", this.props.currency._id ,direction , (err, data)=>{
-        if(!err){
-          
-        }
-        else{
-          console.log(err.reason);
-        }
-      });
+    this.props.setCurrency({});
+    this.props.getCurrencies();
+    Meteor.call("VoteCoinPerf", this.props.currency._id, direction, (err, data) => {
+      if (!err) {
+        AsyncStorage.getItem('firstTimeLike', (error, result) => {
+          if (!error) {
+            if (result == null) {
+              this.setState({ likeToolTipVisible: true });
+              AsyncStorage.setItem('firstTimeLike', "false");
+            }
+          }
+        })
+      }
+      else {
+        console.log(err.reason);
+      }
+    });
   }
 
-  _ChangeCoins(){
-    if(this.props.currency._id == undefined){
+  _ChangeCoins() {
+    if (this.props.currency._id == undefined) {
       //stop it when loading
       return;
     }
-      this.props.setCurrency({});
-      this.props.getCurrencies();
+    this.props.setCurrency({});
+    this.props.getCurrencies();
   }
 
   render() {
@@ -89,24 +117,33 @@ class CointFooter extends Component {
     //   </Footer>
     //   )
     // }
-    return (
+    return (<Tooltip
+      animated
+      isVisible={this.state.likeToolTipVisible}
+      content={<View><Text> Your liked Coin will be stored. </Text></View>}
+      // displayArea={{ x: 0, y: 0, width: Dimensions.get('screen').width, height: Dimensions.get('screen').height }}
+      // placement="top"
+      onChildPress={() => { }}
+      onClose={() => this.setState({ likeToolTipVisible: false })}
+    >
       <Footer>
         <FooterTab style={AppStyle.footerLight}>
-          <Button full onPress={()=>{this._LikeCoins("down")}}>
+          <Button full onPress={() => { this._LikeCoins("down") }}>
             <Icon name="close-circle" style={{ color: "#d9534f" }} />
           </Button>
-          <Button full onPress={()=>{this._LikeCoins("up")}}>
+          <Button full onPress={() => { this._LikeCoins("up") }}>
             <Icon name="checkmark-circle" style={{ color: "#5cb85c" }} />
           </Button>
         </FooterTab>
       </Footer>
+    </Tooltip>
     );
   }
 }
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(
-    (CointFooter)
-  );
+  mapStateToProps,
+  mapDispatchToProps
+)(
+  (CointFooter)
+);

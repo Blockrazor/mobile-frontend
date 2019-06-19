@@ -63,6 +63,12 @@ export default class CoinHeader extends Component {
             </Button>
             <Button
               transparent
+              onPress={()=>this.props.navigation.navigate("LikedCoin")}
+            >
+              <Icon name='heart' style={{color:'red'}}/>
+            </Button>
+            <Button
+              transparent
               onPress={()=>this.props.navigation.navigate("Wall")}
             >
               <Icon name='notifications' />
