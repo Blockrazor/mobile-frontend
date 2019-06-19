@@ -123,7 +123,7 @@ class CointFooter extends Component {
       content={<View><Text> Your liked Coin will be stored. </Text></View>}
       // displayArea={{ x: 0, y: 0, width: Dimensions.get('screen').width, height: Dimensions.get('screen').height }}
       // placement="top"
-      onChildPress={() => { }}
+      onChildPress={() => { this.setState({ likeToolTipVisible: false })}}
       onClose={() => this.setState({ likeToolTipVisible: false })}
     >
       <Footer>
